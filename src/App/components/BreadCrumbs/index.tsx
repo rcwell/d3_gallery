@@ -36,14 +36,13 @@ export default BreadCrumbs;
 
 const black = `#5a5a5a`;
 const grey = `#aeaeae`;
+const blue = `cornflowerblue`;
 
-const CrumbsContainer = styled.div`
-    width:100%;
+const CrumbsContainer = styled.section`
+    color: ${blue};
     height:50px;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    position:relative;
     div{
         display: flex;
         align-items: center;
@@ -59,4 +58,11 @@ const CrumbsContainer = styled.div`
         color:${grey};
         pointer-events:none;
     }
+    
+    position:absolute;
+    top:-5px;
+    left:-5px;
+    right:8px;
+    z-index:1;
+    background:linear-gradient(180deg,#f7f7f7 50%,transparent);
 `;

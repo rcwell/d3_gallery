@@ -1,29 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import BreadCrumbs from 'App/components/BreadCrumbs';
-import { ReactComponent as Rect } from 'App/components/Icons/rect.svg';
-import { ReactComponent as Circle } from 'App/components/Icons/circle.svg';
-import { ReactComponent as Ellipse } from 'App/components/Icons/ellipse.svg';
-import { ReactComponent as Line } from 'App/components/Icons/line.svg';
-import { ReactComponent as Polygon } from 'App/components/Icons/polygon.svg';
-import { ReactComponent as Polyline } from 'App/components/Icons/polyline.svg';
-import { ReactComponent as Path } from 'App/components/Icons/path.svg';
-import { ReactComponent as SingleAxes } from 'App/components/Icons/singleAxes.svg';
 import { ReactComponent as XYAxes } from 'App/components/Icons/xYAxes.svg';
-import { ReactComponent as FormattedAxis } from 'App/components/Icons/formattedAxis.svg';
-
-enum SectionTypes{
-    Shapes,
-    Axis,
-    Scales,
-    CoordinatesAndPlotting
-}
 
 interface SectionProps {
     title: string;
     description: string;
     contents: Array<CardProps>;
-    type:SectionTypes
 }
 
 interface CardProps {
@@ -34,144 +17,48 @@ interface CardProps {
     code?: string;
 }
 
-const BasicShapes = [
+const GeoMaps = [
     {
-        title: 'Rect',
+        title: 'Basic World Map',
         description: 'Lorem ipsum dolor sith amet',
-        icon: <Rect />,
-        code: '<rect/>'
     },
     {
-        title: 'Circle',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <Circle />,
-        code: '<circle/>'
+        title: 'Chrolopleth',
+        description: 'Lorem ipsum dolor sith amet'
     },
     {
-        title: 'Ellipse',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <Ellipse />,
-        code: '<ellipse/>'
+        title: 'Bubble Map',
+        description: 'Lorem ipsum dolor sith amet'
     },
     {
-        title: 'Line',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <Line />,
-        code: '<line/>'
-    },
-    {
-        title: 'Polygon',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <Polygon />,
-        code: '<polygon/>'
-    },
-    {
-        title: 'Polyline',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <Polyline />,
-        code: '<polyline/>'
-    },
-    {
-        title: 'Path',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <Path />,
-        code: '<path/>'
-    }
-];
-const BasicAxis = [
-    {
-        title: 'Single Axis',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <SingleAxes />,
-        code: 'x-axis'
-    },
-    {
-        title: 'X & Y Axis',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <XYAxes />,
-        code: 'x-y-axis'
-    },
-    {
-        title: 'Formatted Axis',
-        description: 'Lorem ipsum dolor sith amet',
-        icon: <FormattedAxis />,
-        code: 'formatted-axis'
+        title: 'Pattern Fill',
+        description: 'Lorem ipsum dolor sith amet'
     }
 ];
 
-const BasicScales = [
-    {
-        title: 'Linear',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Band',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Point',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Ordinal',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Threshold',
-        description: 'Lorem ipsum dolor sith amet'
-    }
-]
-
-const CoordPlotting = [
-    {
-        title: 'Coordinatates',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Plotting',
-        description: 'Lorem ipsum dolor sith amet'
-    }
-
-]
-const Basics = () => {
+const Geo = () => {
     return (
         <>
-            <BreadCrumbs links={["HOME", "BASICS"]} />
+            <BreadCrumbs links={["HOME", "GEO"]} />
             <ScrollContent>
                 <Header>
-                    <Title>Basics</Title>
+                    <Title>Geo</Title>
                     <Description>
                         Lorem ipsum dolor sith amet
                 </Description>
                 </Header>
                 <BodyContent>
                     <Section
-                        type={SectionTypes.Shapes}
-                        title={"Shapes"}
-                        description={"Lorem ipsum dolor sith amet"}
-                        contents={BasicShapes} />
-                    <Section
-                        type={SectionTypes.Axis}
-                        title={"Axis"}
-                        description={"Lorem ipsum dolor sith amet"}
-                        contents={BasicAxis} />
-                    <Section
-                        type={SectionTypes.Scales}
-                        title={"Principal Scales"}
-                        description={"Lorem ipsum dolor sith amet"}
-                        contents={BasicScales} />
-                    <Section
-                        type={SectionTypes.CoordinatesAndPlotting}
-                        title={"Coordinates and Plotting"}
-                        description={"Lorem ipsum dolor sith amet"}
-                        contents={CoordPlotting} />
+                        title={""}
+                        description={""}
+                        contents={GeoMaps} />
                 </BodyContent>
             </ScrollContent>
         </>
     );
 };
 
-export default Basics;
+export default Geo;
 
 const black = `#5a5a5a`;
 const grey = `#aeaeae`;

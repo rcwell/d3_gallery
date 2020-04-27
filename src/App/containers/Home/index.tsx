@@ -20,9 +20,9 @@ const Home = () => {
                 {<TiChartArea />}
                 <div>Charts</div>
             </LinkCard>
-            <LinkCard to="/maps">
+            <LinkCard to="/Geo">
                 {<FaGlobeAmericas />}
-                <div>Maps</div>
+                <div>Geo</div>
             </LinkCard>
             <LinkCard to="/customvisualizations">
                 {<FaMagic />}
@@ -79,7 +79,7 @@ const Card = styled.div`
         font-size: 15px;
     }
 `;
-const CardContainer = styled.section`
+const CardContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);

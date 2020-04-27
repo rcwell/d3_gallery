@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Basics from 'App/containers/Basics';
 import Charts from 'App/containers/Charts';
-import Maps from 'App/containers/Maps';
+import Geo from 'App/containers/Geo';
 import CustomVisualizations from 'App/containers/CustomVisualizations';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {
@@ -68,7 +68,7 @@ const App = () => {
 
 export default App;
 
-const RouterComponents = ({ location, onRouteChange }: any) => {
+const Routes = withRouter(({ location, onRouteChange }: any) => {
     const { pathname } = location;
 
     React.useEffect(() => {
@@ -94,8 +94,8 @@ const RouterComponents = ({ location, onRouteChange }: any) => {
                         <Route path="/charts">
                             <Charts />
                         </Route>
-                        <Route path="/maps">
-                            <Maps />
+                        <Route path="/geo">
+                            <Geo />
                         </Route>
                         <Route path="/customvisualizations">
                             <CustomVisualizations />
@@ -108,8 +108,7 @@ const RouterComponents = ({ location, onRouteChange }: any) => {
             </CSSTransition>
         </TransitionGroup>
     )
-}
-const Routes = withRouter(RouterComponents);
+});
 
 const black = `#5a5a5a`;
 const blue = `cornflowerblue`;
@@ -120,10 +119,14 @@ const green = `#77d980`;
 
 const TransitionWrap = styled.div`
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+
+    > section{
+        padding:0 20px;
+    }
 `;
 
 const Wrapper = styled.section`

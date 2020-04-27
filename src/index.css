@@ -34,3 +34,21 @@ code {
   opacity:0;
   transition: opacity 150ms linear;
 }
+
+*::-webkit-scrollbar-track
+{
+	border-radius: 4px;
+	background-color: #e8e8e8;
+}
+
+*::-webkit-scrollbar
+{
+	width: 8px;
+}
+
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 4px;
+	background-color: #555;
+}
