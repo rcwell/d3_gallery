@@ -16,9 +16,19 @@ import {
 } from 'App/data';
 
 const Charts = () => {
+    const mainRoutes: Array<any> = [
+        {
+            path: "/",
+            displayname: 'home'
+        },
+        {
+            path: "/charts",
+            displayname: 'charts'
+        }
+    ];
     return (
         <ScrollableSection>
-            <PageHeader title={"Charts"} description={"Lorem ipsum dolor sith amet"} route={["HOME", "CHARTS"]} />
+            <PageHeader title={"Charts"} description={"Lorem ipsum dolor sith amet"} route={mainRoutes} />
             <Body>
                 <Section
                     title={"Line"}

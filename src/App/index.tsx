@@ -16,6 +16,8 @@ import { FaExpandAlt, FaCompressAlt } from 'react-icons/fa';
 import { AiFillGithub } from 'react-icons/ai';
 import transitionHOC from 'App/components/transitionHOC';
 
+import { Title, Description } from 'App/components/Styled';
+
 const App = () => {
     const [isExpanded, setExpanded] = React.useState(Boolean);
     const [currentLocation, setLocation] = React.useState(String);
@@ -29,6 +31,7 @@ const App = () => {
 
     const handleOnRouteChange = (location: string) => {
         if (currentLocation === location) return;
+        if (location.split('/').length > 2) return;
         setExpanded(location !== '/');
         setLocation(location);
     };
@@ -68,10 +71,11 @@ const Routes = withRouter(({ location, onRouteChange }: any) => {
     const { pathname } = location;
 
     React.useEffect(() => {
+        if (pathname.split('/').length > 2) return;
         onRouteChange(pathname);
     }, [pathname, onRouteChange]);
 
-    return transitionHOC(pathname)(
+    return transitionHOC(pathname.split('/').filter((x: string) => x !== '')[0] || "Home")(
         <Switch location={location}>
             <Route path="/basics">
                 <Basics />
@@ -184,9 +188,24 @@ const Header = styled.header`
     background: ${lightBlue};
     align-items: center;
     justify-content:center;
-    color: ${blue};
     opacity: ${props => props.theme.expanded ? 0 : 1};
     transition: opacity .3s ease-in-out;
+
+    ${Title}{
+        font-weight: 600;
+        font-size: 1.3rem;
+        color: ${blue};
+        margin-bottom: .8em;
+    }
+
+    ${Description}{
+        font-size: 1.1rem;
+        font-weight: 400;
+        max-width: 400px;
+        text-align: center;
+        color: ${blue};
+        margin-bottom: .8em;
+    }
 `;
 Header.defaultProps = {
     theme: {
@@ -202,16 +221,6 @@ const IconLink = styled.a`
     :hover {
         color: ${blue};
     }
-`;
-const Title = styled.h1`
-    font-weight: 600;
-    font-size: 1.3rem;
-`;
-const Description = styled.h2`
-    font-size: 1.1rem;
-    font-weight: 400;
-    max-width: 400px;
-    text-align: center;
 `;
 const ViewportBody = styled.section`
     height:100%;

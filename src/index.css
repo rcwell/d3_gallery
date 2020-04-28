@@ -24,7 +24,7 @@ code {
 .fade-appear-active,
 .fade-enter.fade-enter-active{
   opacity:1;
-  transition: opacity 300ms linear 150ms;
+  transition: opacity .3s linear .15s;
 }
 .fade-exit{
   opacity: 1;
@@ -32,7 +32,7 @@ code {
 
 .fade-exit.fade-exit-active{
   opacity:0;
-  transition: opacity 150ms linear;
+  transition: opacity .15s linear;
 }
 
 *::-webkit-scrollbar-track
@@ -45,7 +45,6 @@ code {
 {
 	width: 8px;
 }
-
 
 *::-webkit-scrollbar-thumb
 {

@@ -4,18 +4,22 @@ import { AiFillHome } from 'react-icons/ai';
 import { GoChevronRight } from 'react-icons/go';
 import { Link } from "react-router-dom";
 import { black, grey, blue } from 'App/components/Colors';
+import { BreadcrumbProps, CrumbLink } from 'App/interface';
 
-const BreadCrumbs = ({ links }: any) => {
+const BreadCrumbs = ({ links }: BreadcrumbProps) => {
     return (
         <CrumbsContainer>
+
+            <div key={"/"}>
+                <AiFillHome style={{ marginRight: 10 }} />
+                <Link to={"/"}>HOME</Link>
+            </div>
             {
-                links.map((link: string, i: number) => {
+                links.map(({ path, displayname }: CrumbLink) => {
                     return (
-                        <div key={link}>
-                            {i === 0
-                                ? <AiFillHome style={{ marginRight: 10 }} />
-                                : <GoChevronRight size={20} strokeWidth={0.5} style={{ margin: "0 10px" }} stroke={black} fill={black} />}
-                            <Link key={link} to="/">{link}</Link>
+                        <div key={path}>
+                            <GoChevronRight size={20} strokeWidth={0.5} style={{ margin: "0 10px" }} stroke={black} fill={black} />
+                            <Link key={path} to={path}>{displayname.toUpperCase()}</Link>
                         </div>
                     )
                 })

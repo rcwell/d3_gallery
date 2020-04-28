@@ -5,7 +5,7 @@ import { SectionProps, CardProps } from 'App/interface';
 import { Title, Description } from 'App/components/Styled';
 import { blue, grey } from 'App/components/Colors';
 
-const Section = ({ title, description, contents }: SectionProps) => {
+const Section = ({ title, description, contents, onCardClick }: SectionProps) => {
     return (
         <SectionWrapper>
             <Title>{title}</Title>
@@ -15,6 +15,7 @@ const Section = ({ title, description, contents }: SectionProps) => {
             <CardsWrapper>
                 {contents.map((x, i) => (
                     <SectionCard
+                        onClick={() => onCardClick ? onCardClick(x) : null}
                         key={i.toString()}
                         id={i.toString()}
                         title={x.title}
@@ -26,9 +27,9 @@ const Section = ({ title, description, contents }: SectionProps) => {
         </SectionWrapper>
     )
 }
-const SectionCard = ({ id, title, icon, description, code }: CardProps) => {
+const SectionCard = ({ id, title, icon, description, code, onClick }: CardProps) => {
     return (
-        <Card key={id}>
+        <Card key={id} onClick={onClick}>
             <div>
                 <div>{icon || <D3 />}</div>
                 <div>{code || "--"}</div>
@@ -63,6 +64,8 @@ const Card = styled.div`
     border-radius:3px;
     display: grid;
     grid-template-rows: 50px 1fr;
+    cursor:pointer; 
+    transition:all .3s ease-in-out;
 
     > div:first-child{
         border-bottom:1px solid #eee;
@@ -103,6 +106,10 @@ const Card = styled.div`
     ${Title}{
         font-size: 1rem;
         margin: .25em 0;
+    }
+
+    :hover{
+        box-shadow: -2px 10px 50px -13px rgba(0,0,0,.15);
     }
 `;
 
