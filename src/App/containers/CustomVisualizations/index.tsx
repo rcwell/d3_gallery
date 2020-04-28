@@ -1,35 +1,19 @@
 import React from 'react';
-import {
-    ScrollContent,
-    Header,
-    Title,
-    Description,
-    BodyContent
-}from 'App/components/Styled';
-import {
-    BreadCrumbs,
-    Section
-}from 'App/components/Layout';
+import Section from 'App/components/Section';
+import PageHeader from 'App/components/PageHeader';
+import { ScrollableSection, Body } from 'App/components/Styled';
 
 const CustomVisualizations = () => {
     return (
-        <>
-            <BreadCrumbs links={["HOME", "CUSTOM VISUALIZATIONS"]} />
-            <ScrollContent>
-                <Header>
-                    <Title>Custom Visualizations</Title>
-                    <Description>
-                        Lorem ipsum dolor sith amet
-                    </Description>
-                </Header>
-                <BodyContent>
-                    <Section
-                        title={""}
-                        description={""}
-                        contents={[]} />
-                </BodyContent>
-            </ScrollContent>
-        </>
+        <ScrollableSection>
+            <PageHeader title={"Custom Visualizations"} description={"Lorem ipsum dolor sith amet"} route={["HOME", "CUSTOM VISUALIZATION"]} />
+            <Body>
+                <Section
+                    title={""}
+                    description={""}
+                    contents={[]} />
+            </Body>
+        </ScrollableSection>
     );
 };
 

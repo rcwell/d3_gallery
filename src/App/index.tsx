@@ -11,14 +11,10 @@ import Basics from 'App/containers/Basics';
 import Charts from 'App/containers/Charts';
 import Geo from 'App/containers/Geo';
 import CustomVisualizations from 'App/containers/CustomVisualizations';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import {
-    FaExpandAlt,
-    FaCompressAlt
-} from 'react-icons/fa';
-import {
-    AiFillGithub
-} from 'react-icons/ai';
+import { black, blue, lightBlue, red, orange, green } from 'App/components/Colors';
+import { FaExpandAlt, FaCompressAlt } from 'react-icons/fa';
+import { AiFillGithub } from 'react-icons/ai';
+import transitionHOC from 'App/components/transitionHOC';
 
 const App = () => {
     const [isExpanded, setExpanded] = React.useState(Boolean);
@@ -38,7 +34,7 @@ const App = () => {
     };
 
     return (
-        <Wrapper>
+        <AppWrapper>
             <Header theme={{ expanded: isExpanded }}>
                 <Title>D3 Component Gallery</Title>
                 <Description>
@@ -56,13 +52,13 @@ const App = () => {
                         {isExpanded ? <FaCompressAlt /> : <FaExpandAlt />}
                     </div>
                 </ViewTopBar>
-                <BodyContent>
+                <ViewportBody>
                     <Router>
                         <Routes onRouteChange={handleOnRouteChange} />
                     </Router>
-                </BodyContent>
+                </ViewportBody>
             </ViewPort>
-        </Wrapper>
+        </AppWrapper>
     );
 };
 
@@ -75,61 +71,28 @@ const Routes = withRouter(({ location, onRouteChange }: any) => {
         onRouteChange(pathname);
     }, [pathname, onRouteChange]);
 
-    return (
-        <TransitionGroup style={{
-            height: '100%',
-            width: '100%',
-            position: 'relative'
-        }}>
-            <CSSTransition
-                key={pathname}
-                timeout={500}
-                classNames={"fade"}
-            >
-                <TransitionWrap>
-                    <Switch location={location}>
-                        <Route path="/basics">
-                            <Basics />
-                        </Route>
-                        <Route path="/charts">
-                            <Charts />
-                        </Route>
-                        <Route path="/geo">
-                            <Geo />
-                        </Route>
-                        <Route path="/customvisualizations">
-                            <CustomVisualizations />
-                        </Route>
-                        <Route exact path="/">
-                            <Home />
-                        </Route>
-                    </Switch>
-                </TransitionWrap>
-            </CSSTransition>
-        </TransitionGroup>
+    return transitionHOC(pathname)(
+        <Switch location={location}>
+            <Route path="/basics">
+                <Basics />
+            </Route>
+            <Route path="/charts">
+                <Charts />
+            </Route>
+            <Route path="/geo">
+                <Geo />
+            </Route>
+            <Route path="/customvisualizations">
+                <CustomVisualizations />
+            </Route>
+            <Route exact path="/">
+                <Home />
+            </Route>
+        </Switch>
     )
 });
 
-const black = `#5a5a5a`;
-const blue = `cornflowerblue`;
-const lightBlue = `aliceblue`;
-const red = `#e75e5e`;
-const orange = `#f1ae42`;
-const green = `#77d980`;
-
-const TransitionWrap = styled.div`
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-
-    > section{
-        padding:0 20px;
-    }
-`;
-
-const Wrapper = styled.section`
+const AppWrapper = styled.section`
     justify-content: center;
     background: #ffffff;
     display: flex;
@@ -230,10 +193,6 @@ Header.defaultProps = {
         expanded: false
     }
 };
-const Title = styled.h1`
-    font-weight: 600;
-    font-size: 1.3rem;
-`;
 const IconLink = styled.a`
     font-weight: 600;
     font-size: 1.3rem;
@@ -244,13 +203,17 @@ const IconLink = styled.a`
         color: ${blue};
     }
 `;
+const Title = styled.h1`
+    font-weight: 600;
+    font-size: 1.3rem;
+`;
 const Description = styled.h2`
     font-size: 1.1rem;
     font-weight: 400;
     max-width: 400px;
     text-align: center;
 `;
-const BodyContent = styled.section`
+const ViewportBody = styled.section`
     height:100%;
     width:100%;
 `;

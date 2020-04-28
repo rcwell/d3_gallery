@@ -11,3 +11,9 @@ export interface CardProps {
     id?: string;
     code?: string;
 }
+
+export interface PageHeaderProps {
+    title: string,
+    description: string;
+    route:Array<String>;
+}
