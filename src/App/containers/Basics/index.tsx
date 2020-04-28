@@ -5,8 +5,8 @@ import { BasicShapes, BasicAxis, BasicScales, CoordPlotting } from 'App/data';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import { SingleAxis, XYAxis, FormattedAxis } from './Axis';
 import { Coordinates, Plotting } from './CoordinatesPlotting';
+import RouteWrapper from 'App/components/RouteWrapper';
 import Section from "App/components/Section";
-import RouteWrapper from './RouteWrapper';
 import { CardProps } from 'App/interface';
 
 export const MainRoute = [

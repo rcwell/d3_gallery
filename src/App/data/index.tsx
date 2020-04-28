@@ -13,7 +13,13 @@ import {
 } from 'App/components/Icons';
 import { CardProps } from 'App/interface';
 
-const BasicShapes: Array<CardProps> = [
+interface RouteCardProps extends CardProps{
+    d: {
+        path:string;
+    }
+}
+
+const BasicShapes: Array<RouteCardProps> = [
     {
         title: 'Rect',
         description: 'Lorem ipsum dolor sith amet',
@@ -78,7 +84,7 @@ const BasicShapes: Array<CardProps> = [
         }
     }
 ];
-const BasicAxis: Array<CardProps> = [
+const BasicAxis: Array<RouteCardProps> = [
     {
         title: 'Single Axis',
         description: 'Lorem ipsum dolor sith amet',
@@ -107,7 +113,7 @@ const BasicAxis: Array<CardProps> = [
         }
     }
 ];
-const BasicScales: Array<CardProps> = [
+const BasicScales: Array<RouteCardProps> = [
     {
         title: 'Linear',
         description: 'Lorem ipsum dolor sith amet',
@@ -144,7 +150,7 @@ const BasicScales: Array<CardProps> = [
         }
     }
 ]
-const CoordPlotting: Array<CardProps> = [
+const CoordPlotting: Array<RouteCardProps> = [
     {
         title: 'Coordinatates',
         description: 'Lorem ipsum dolor sith amet',
@@ -161,164 +167,258 @@ const CoordPlotting: Array<CardProps> = [
     }
 ]
 
-const LineCharts: Array<CardProps> = [
+const LineCharts: Array<RouteCardProps> = [
     {
-        title: 'Basic',
+        title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'line/simple'
+        }
     },
     {
         title: 'StepLine',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'line/step-line'
+        }
     },
     {
         title: 'Multiple Datasets',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'line/multiple-datasets'
+        }
     },
     {
-        title: 'Timeseries',
-        description: 'Lorem ipsum dolor sith amet'
+        title: 'time-series',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'line/time-series'
+        }
     },
     {
         title: 'Realtime',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'line/realtime'
+        }
     }
 ];
-const AreaCharts: Array<CardProps> = [
+const AreaCharts: Array<RouteCardProps> = [
     {
-        title: 'Basic',
+        title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
-    },
-    {
-        title: 'Multiple Datasets',
-        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'area/simple'
+        }
     },
     {
         title: 'Stacked',
         description: 'Lorem ipsum dolor sith amet',
-    },
-    {
-        title: 'Timeseries',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Realtime',
-        description: 'Lorem ipsum dolor sith amet'
-    }
-];
-const BarCharts: Array<CardProps> = [
-    {
-        title: 'Basic',
-        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'area/stacked'
+        }
     },
     {
         title: 'Multiple Datasets',
         description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'area/multiple-datasets'
+        }
     },
     {
-        title: 'Vertical',
+        title: 'time-series',
         description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'area/time-series'
+        }
+    },
+    {
+        title: 'Realtime',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'area/realtime'
+        }
+    }
+];
+const BarCharts: Array<RouteCardProps> = [
+    {
+        title: 'Simple',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/simple'
+        }
+    },
+    {
+        title: 'Multiple Datasets',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/simple'
+        }
+    },
+    {
+        title: 'Column',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/column'
+        }
     },
     {
         title: 'Stacked',
         description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/stacked'
+        }
     },
     {
         title: 'Negative',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/negative'
+        }
     },
     {
-        title: 'Timeseries',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Realtime',
-        description: 'Lorem ipsum dolor sith amet'
+        title: 'time-series',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/time-series'
+        }
     },
     {
         title: 'Radial',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bar/radial'
+        }
     }
 ];
-const ScatterCharts: Array<CardProps> = [
+const ScatterCharts: Array<RouteCardProps> = [
     {
-        title: 'Scatter',
-        description: 'Lorem ipsum dolor sith amet'
+        title: 'Simple',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'scatter/simple'
+        }
     },
     {
         title: 'Bubble',
-        description: 'Lorem ipsum dolor sith amet'
-    },
-    {
-        title: 'Timeseries',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'scatter/bubble'
+        }
     },
     {
         title: 'Icons',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'scatter/icons'
+        }
     }
 ];
-const PieCharts: Array<CardProps> = [
+const PieCharts: Array<RouteCardProps> = [
     {
-        title: 'Basic',
-        description: 'Lorem ipsum dolor sith amet'
+        title: 'Simple',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'pie/simple'
+        }
     },
     {
         title: 'Pattern',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'pie/pattern'
+        }
     },
     {
         title: 'Image',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'pie/image'
+        }
     },
     {
         title: 'Donut',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'pie/donut'
+        }
     }
 ];
-const RadarCharts: Array<CardProps> = [
+const RadarCharts: Array<RouteCardProps> = [
     {
-        title: 'Basic',
-        description: 'Lorem ipsum dolor sith amet'
+        title: 'Simple',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'radar/simple'
+        }
     },
     {
         title: 'Multiple Datasets',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'radar/multiple-datasets'
+        }
     },
     {
         title: 'Color Fill Polygon',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'radar/color-fill-polygon'
+        }
     }
 ];
-const HeatmapCharts: Array<CardProps> = [
+const HeatmapCharts: Array<RouteCardProps> = [
     {
-        title: 'Basic',
-        description: 'Lorem ipsum dolor sith amet'
+        title: 'Simple',
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'heatmap/simple'
+        }
     },
     {
         title: 'Multiple Datasets',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'heatmap/multiple-datasets'
+        }
     },
     {
         title: 'Color Range',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'heatmap/color-range'
+        }
     }
 ];
-const GeoMaps: Array<CardProps> = [
+const GeoMaps: Array<RouteCardProps> = [
     {
-        title: 'Basic World Map',
+        title: 'Simple World Map',
         description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'simple-world-map'
+        }
     },
     {
         title: 'Chrolopleth',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'chrolopleth'
+        }
     },
     {
         title: 'Bubble Map',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'bubble-map'
+        }
     },
     {
         title: 'Pattern Fill',
-        description: 'Lorem ipsum dolor sith amet'
+        description: 'Lorem ipsum dolor sith amet',
+        d:{
+            path:'pattern-fill'
+        }
     }
 ];
 

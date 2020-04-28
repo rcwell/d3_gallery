@@ -17,7 +17,7 @@ const Home = () => {
                 {<TiChartArea />}
                 <div>Charts</div>
             </LinkCard>
-            <LinkCard to="/Geo">
+            <LinkCard to="/geo">
                 {<FaGlobeAmericas />}
                 <div>Geo</div>
             </LinkCard>

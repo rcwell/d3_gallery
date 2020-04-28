@@ -1,6 +1,6 @@
 
 import React from 'react';
-import RouteWrapper from '../RouteWrapper';
+import RouteWrapper from 'App/components/RouteWrapper';
 import { MainRoute } from '../index';
 
 export const OrdinalScale = ({ location: { pathname } }: any) => {
