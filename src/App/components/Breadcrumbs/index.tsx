@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AiFillHome } from 'react-icons/ai';
 import { GoChevronRight } from 'react-icons/go';
 import { Link } from "react-router-dom";
-import { black, grey, blue } from 'App/components/Colors';
+import { black, gray, blue } from 'App/components/Colors';
 import { BreadcrumbProps, CrumbLink } from 'App/interface';
 
 const BreadCrumbs = ({ links }: BreadcrumbProps) => {
@@ -52,7 +52,7 @@ div a{
     font-size:14px;
 }
 div:last-child a{
-    color:${grey};
+    color:${gray};
     pointer-events:none;
 }
 `;

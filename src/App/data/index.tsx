@@ -195,13 +195,6 @@ const LineCharts: Array<RouteCardProps> = [
         d:{
             path:'line/time-series'
         }
-    },
-    {
-        title: 'Realtime',
-        description: 'Lorem ipsum dolor sith amet',
-        d:{
-            path:'line/realtime'
-        }
     }
 ];
 const AreaCharts: Array<RouteCardProps> = [
@@ -210,13 +203,6 @@ const AreaCharts: Array<RouteCardProps> = [
         description: 'Lorem ipsum dolor sith amet',
         d:{
             path:'area/simple'
-        }
-    },
-    {
-        title: 'Stacked',
-        description: 'Lorem ipsum dolor sith amet',
-        d:{
-            path:'area/stacked'
         }
     },
     {
@@ -232,13 +218,6 @@ const AreaCharts: Array<RouteCardProps> = [
         d:{
             path:'area/time-series'
         }
-    },
-    {
-        title: 'Realtime',
-        description: 'Lorem ipsum dolor sith amet',
-        d:{
-            path:'area/realtime'
-        }
     }
 ];
 const BarCharts: Array<RouteCardProps> = [
@@ -253,7 +232,7 @@ const BarCharts: Array<RouteCardProps> = [
         title: 'Multiple Datasets',
         description: 'Lorem ipsum dolor sith amet',
         d:{
-            path:'bar/simple'
+            path:'bar/multiple-datasets'
         }
     },
     {

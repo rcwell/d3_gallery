@@ -4,7 +4,7 @@ import { MainRoute } from '../index';
 
 export const Stacked = ({ location: { pathname } }: any) => {
     const routes = [
-        ...MainRoute,
+        MainRoute,
         {
             path: pathname,
             displayname: "stacked"

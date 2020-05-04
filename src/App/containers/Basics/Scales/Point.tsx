@@ -5,7 +5,7 @@ import { MainRoute } from '../index';
 
 export const PointScale = ({ location: { pathname } }: any) => {
     const routes = [
-        ...MainRoute,
+        MainRoute,
         {
             path: pathname,
             displayname: "point scale"

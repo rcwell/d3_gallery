@@ -9,12 +9,10 @@ import RouteWrapper from 'App/components/RouteWrapper';
 import Section from "App/components/Section";
 import { CardProps } from 'App/interface';
 
-export const MainRoute = [
-    {
-        path: `/basics`,
-        displayname: "basics"
-    },
-];
+export const MainRoute = {
+    path: `/basics`,
+    displayname: "basics"
+};
 
 const Basics = () => {
     const { location, push } = useHistory();
@@ -92,7 +90,7 @@ const Basics = () => {
                     <RouteWrapper
                         title={"Basics"}
                         description={"Lorem ipsum dolor sith amet"}
-                        route={MainRoute}>
+                        route={[MainRoute]}>
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Shapes"}

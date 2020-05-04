@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { D3 } from 'App/components/Icons';
 import { SectionProps, CardProps } from 'App/interface';
 import { Title, Description } from 'App/components/Styled';
-import { blue, grey } from 'App/components/Colors';
+import { blue, gray } from 'App/components/Colors';
 
 const Section = ({ title, description, contents, onCardClick }: SectionProps) => {
     return (
@@ -95,7 +95,7 @@ const Card = styled.div`
             transform: translateY(-50%);
             font-size: 12px;
             font-weight: 700;
-            color:${grey};
+            color:${gray};
         }
     }
 

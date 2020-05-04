@@ -1,17 +1,17 @@
 import React from 'react';
 import Section from 'App/components/Section';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
+import { SimpleWorldMap, Chrolopleth, Bubble, Pattern } from './Maps';
 import RouteWrapper from 'App/components/RouteWrapper';
 import { CardProps } from 'App/interface';
 import { GeoMaps } from 'App/data';
-import { SimpleWorldMap, Chrolopleth, Bubble, Pattern } from './Maps';
+// import transitionHOC, { TransitionTypes } from 'App/components/transitionHOC';
+// transitionHOC(location.pathname, TransitionTypes.Slide__Left)
 
-export const MainRoute = [
-    {
-        path: `/geo`,
-        displayname: "geo"
-    },
-];
+export const MainRoute = {
+    path: `/geo`,
+    displayname: "geo"
+};
 
 const Geo = () => {
     const { location, push } = useHistory();
@@ -38,16 +38,15 @@ const Geo = () => {
                 path={`${path}/bubble-map`}
                 component={Bubble} />
             <Route
-                path={`${path}/pattern-fill`}
+                path={`${path}/pattern`}
                 component={Pattern} />
-
             <Route
                 path={path}
                 component={() => (
                     <RouteWrapper
                         title={"Geo"}
                         description={"Lorem ipsum dolor sith amet"}
-                        route={MainRoute}>
+                        route={[MainRoute]}>
                         <Section
                             onCardClick={handleOnCardClick}
                             title={""}

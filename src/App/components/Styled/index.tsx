@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { black, grey } from 'App/components/Colors';
+import { black } from 'App/components/Colors';
 
 const ScrollableSection = styled.section`
     height: 100%;
     overflow: auto;
+    color: ${black};
+
 `;
 const Body = styled.section`
     display: flex;
     flex-direction: column;
+    flex-grow:1;
 `;
 const Header = styled.header`
     display: flex;
@@ -20,11 +23,18 @@ const Title = styled.h1`
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: .25em;
-    color: ${black};
 `;
-const Description = styled.label`
-    color: ${grey};
+const StoryBlock = styled.section`
+    margin:1rem 0;
+    display: flex;
+    flex-direction: column;
+
+    > svg{
+        margin-left:1rem;
+    }
 `;
+
+const Description = styled.label``;
 
 export {
     ScrollableSection,
@@ -32,4 +42,5 @@ export {
     Title,
     Description,
     Body,
+    StoryBlock
 }

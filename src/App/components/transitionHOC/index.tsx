@@ -2,17 +2,24 @@ import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 
-const transitionHOC = (key: any) => (component: any) => {
+export enum TransitionTypes {
+    Fade = 'fade',
+    Slide__Left = 'slide__left',
+    Slide__Right = 'slide__right'
+}
+
+const transitionHOC = (key: any, transition: TransitionTypes) => (component: any) => {
     return (
         <TransitionGroup style={{
             height: '100%',
             width: '100%',
-            position: 'relative'
+            position: 'relative',
+            overflow: 'hidden'
         }}>
             <CSSTransition
                 key={key}
                 timeout={500}
-                classNames={"fade"}
+                classNames={transition}
             >
                 <Transition>
                     {component}
@@ -21,8 +28,6 @@ const transitionHOC = (key: any) => (component: any) => {
         </TransitionGroup>
     )
 }
-
-export default transitionHOC;
 
 const Transition = styled.div`
     position: absolute;
@@ -33,5 +38,9 @@ const Transition = styled.div`
 
     > section{
         padding:0 20px;
+        display: flex;
+        flex-direction: column;
     }
 `;
+
+export default transitionHOC;

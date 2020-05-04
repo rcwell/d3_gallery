@@ -5,7 +5,7 @@ import { MainRoute } from '../index';
 
 export const Path = ({ location: { pathname } }: any) => {
     const routes = [
-        ...MainRoute,
+        MainRoute,
         {
             path: pathname,
             displayname: "path"

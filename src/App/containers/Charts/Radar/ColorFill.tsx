@@ -4,7 +4,7 @@ import { MainRoute } from '../index';
 
 export const ColorFill = ({ location: { pathname } }: any) => {
     const routes = [
-        ...MainRoute,
+        MainRoute,
         {
             path: pathname,
             displayname: "Color"

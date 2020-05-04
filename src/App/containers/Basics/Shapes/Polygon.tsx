@@ -5,7 +5,7 @@ import { MainRoute } from '../index';
 
 export const Polygon = ({ location: { pathname } }: any) => {
     const routes = [
-        ...MainRoute,
+        MainRoute,
         {
             path: pathname,
             displayname: "polygon"

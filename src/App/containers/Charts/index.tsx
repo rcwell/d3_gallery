@@ -3,58 +3,19 @@ import Section from 'App/components/Section';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import RouteWrapper from 'App/components/RouteWrapper';
 import { CardProps } from 'App/interface';
-import {
-    Simple as Line__Simple,
-    MultipleDatasets as Line__MultipleDatasets,
-    Realtime as Line__Realtime,
-    StepLine as Line__StepLine,
-    TimeSeries as Line__TimeSeries,
-} from './Line';
-import {
-    Simple as Area__Simple,
-    MultipleDatasets as Area__MultipleDatasets,
-    Realtime as Area__Realtime,
-    Stacked as Area__Stacked,
-    TimeSeries as Area__TimeSeries
-} from './Area';
-import {
-    Simple as Bar__Simple,
-    MultipleDatasets as Bar__MultipleDatasets,
-    Negative as Bar__Negative,
-    Radial as Bar__Radial,
-    Stacked as Bar__Stacked,
-    TimeSeries as Bar__TimeSeries,
-    Column as Bar__Column
-} from './Bar';
-import {
-    Simple as Heatmap__Simple,
-    MultipleDatasets as Heatmap__MultipleDatasets,
-    ColorRange as Heatmap__ColorRange,
-} from './Heatmap';
-import {
-    Simple as Pie__Simple,
-    Donut as Pie__Donut,
-    Image as Pie__Image,
-    Pattern as Pie__Pattern
-} from './Pie';
-import {
-    Simple as Radar__Simple,
-    MultipleDatasets as Radar__MultipleDatasets,
-    ColorFill as Radar__ColorFill
-} from './Radar';
-import {
-    Simple as Scatter__Simple,
-    Icons as Scatter__Icons,
-    Bubble as Scatter__Bubble
-} from './Scatter';
+import * as Line from './Line';
+import * as Area from './Area';
+import * as Bar from './Bar';
+import * as Heatmap from './Heatmap';
+import * as Pie from './Pie';
+import * as Radar from './Radar';
+import * as Scatter from './Scatter';
 import { LineCharts, AreaCharts, BarCharts, ScatterCharts, PieCharts, RadarCharts, HeatmapCharts } from 'App/data';
 
-export const MainRoute = [
-    {
-        path: `/charts`,
-        displayname: "charts"
-    },
-];
+export const MainRoute = {
+    path: `/charts`,
+    displayname: "charts"
+};
 
 const Charts = () => {
     const { location, push } = useHistory();
@@ -72,111 +33,33 @@ const Charts = () => {
     return (
         <Switch>
             <Route
-                path={`${path}/line/simple`}
-                component={Line__Simple} />
+                path={`${path}/line`}
+                component={LineRoutes} />
             <Route
-                path={`${path}/line/realtime`}
-                component={Line__Realtime} />
+                path={`${path}/area`}
+                component={AreaRoutes} />
             <Route
-                path={`${path}/line/step-line`}
-                component={Line__StepLine} />
+                path={`${path}/bar`}
+                component={BarRoutes} />
             <Route
-                path={`${path}/line/time-series`}
-                component={Line__TimeSeries} />
+                path={`${path}/scatter`}
+                component={ScatterRoutes} />
             <Route
-                path={`${path}/line/multiple-datasets`}
-                component={Line__MultipleDatasets} />
-
+                path={`${path}/pie`}
+                component={PieRoutes} />
             <Route
-                path={`${path}/area/simple`}
-                component={Area__Simple} />
+                path={`${path}/radar`}
+                component={RadarRoutes} />
             <Route
-                path={`${path}/area/realtime`}
-                component={Area__Realtime} />
-            <Route
-                path={`${path}/area/stacked`}
-                component={Area__Stacked} />
-            <Route
-                path={`${path}/area/time-series`}
-                component={Area__TimeSeries} />
-            <Route
-                path={`${path}/area/multiple-datasets`}
-                component={Area__MultipleDatasets} />
-
-            <Route
-                path={`${path}/bar/simple`}
-                component={Bar__Simple} />
-            <Route
-                path={`${path}/bar/column`}
-                component={Bar__Column} />
-            <Route
-                path={`${path}/bar/multiple-datasets`}
-                component={Bar__MultipleDatasets} />
-            <Route
-                path={`${path}/bar/negative`}
-                component={Bar__Negative} />
-            <Route
-                path={`${path}/bar/radial`}
-                component={Bar__Radial} />
-            <Route
-                path={`${path}/bar/stacked`}
-                component={Bar__Stacked} />
-            <Route
-                path={`${path}/bar/time-series`}
-                component={Bar__TimeSeries} />
-
-
-            <Route
-                path={`${path}/heatmap/simple`}
-                component={Heatmap__Simple} />
-            <Route
-                path={`${path}/heatmap/multiple-datasets`}
-                component={Heatmap__MultipleDatasets} />
-            <Route
-                path={`${path}/heatmap/color-range`}
-                component={Heatmap__ColorRange} />
-
-            <Route
-                path={`${path}/pie/simple`}
-                component={Pie__Simple} />
-            <Route
-                path={`${path}/pie/donut`}
-                component={Pie__Donut} />
-            <Route
-                path={`${path}/pie/image`}
-                component={Pie__Image} />
-            <Route
-                path={`${path}/pie/pattern`}
-                component={Pie__Pattern} />
-
-
-            <Route
-                path={`${path}/radar/simple`}
-                component={Radar__Simple} />
-            <Route
-                path={`${path}/radar/multiple-datasets`}
-                component={Radar__MultipleDatasets} />
-            <Route
-                path={`${path}/radar/color-fill`}
-                component={Radar__ColorFill} />
-
-            <Route
-                path={`${path}/scatter/simple`}
-                component={Scatter__Simple} />
-            <Route
-                path={`${path}/scatter/icons`}
-                component={Scatter__Icons} />
-            <Route
-                path={`${path}/scatter/bubble`}
-                component={Scatter__Bubble} />
-
+                path={`${path}/heatmap`}
+                component={HeatmapRoutes} />
             <Route
                 path={path}
                 component={() => (
                     <RouteWrapper
                         title={"Charts"}
                         description={"Lorem ipsum dolor sith amet"}
-                        route={MainRoute}>
+                        route={[MainRoute]}>
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Line"}
@@ -219,3 +102,151 @@ const Charts = () => {
 };
 
 export default Charts;
+
+
+const LineRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Line.Simple} />
+            <Route
+                path={`${path}/realtime`}
+                component={Line.Realtime} />
+            <Route
+                path={`${path}/step-line`}
+                component={Line.StepLine} />
+            <Route
+                path={`${path}/time-series`}
+                component={Line.TimeSeries} />
+            <Route
+                path={`${path}/multiple-datasets`}
+                component={Line.MultipleDatasets} />
+        </Switch>
+    )
+}
+
+const AreaRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Area.Simple} />
+            <Route
+                path={`${path}/realtime`}
+                component={Area.Realtime} />
+            <Route
+                path={`${path}/stacked`}
+                component={Area.Stacked} />
+            <Route
+                path={`${path}/time-series`}
+                component={Area.TimeSeries} />
+            <Route
+                path={`${path}/multiple-datasets`}
+                component={Area.MultipleDatasets} />
+        </Switch>
+    )
+}
+
+
+const BarRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Bar.Simple} />
+            <Route
+                path={`${path}/column`}
+                component={Bar.Column} />
+            <Route
+                path={`${path}/multiple-datasets`}
+                component={Bar.MultipleDatasets} />
+            <Route
+                path={`${path}/negative`}
+                component={Bar.Negative} />
+            <Route
+                path={`${path}/radial`}
+                component={Bar.Radial} />
+            <Route
+                path={`${path}/stacked`}
+                component={Bar.Stacked} />
+            <Route
+                path={`${path}/time-series`}
+                component={Bar.TimeSeries} />
+        </Switch>
+    )
+}
+
+const HeatmapRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Heatmap.Simple} />
+            <Route
+                path={`${path}/multiple-datasets`}
+                component={Heatmap.MultipleDatasets} />
+            <Route
+                path={`${path}/color-range`}
+                component={Heatmap.ColorRange} />
+        </Switch>
+    )
+}
+
+const PieRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Pie.Simple} />
+            <Route
+                path={`${path}/donut`}
+                component={Pie.Donut} />
+            <Route
+                path={`${path}/image`}
+                component={Pie.Image} />
+            <Route
+                path={`${path}/pattern`}
+                component={Pie.Pattern} />
+        </Switch>
+    )
+}
+
+const RadarRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Radar.Simple} />
+            <Route
+                path={`${path}/multiple-datasets`}
+                component={Radar.MultipleDatasets} />
+            <Route
+                path={`${path}/color-fill`}
+                component={Radar.ColorFill} />
+        </Switch>
+    )
+}
+
+const ScatterRoutes = () => {
+    const { path } = useRouteMatch();
+    return (
+        <Switch>
+            <Route
+                path={`${path}/simple`}
+                component={Scatter.Simple} />
+            <Route
+                path={`${path}/icons`}
+                component={Scatter.Icons} />
+            <Route
+                path={`${path}/bubble`}
+                component={Scatter.Bubble} />
+        </Switch>
+    )
+}

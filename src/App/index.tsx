@@ -14,7 +14,7 @@ import CustomVisualizations from 'App/containers/CustomVisualizations';
 import { black, blue, lightBlue, red, orange, green } from 'App/components/Colors';
 import { FaExpandAlt, FaCompressAlt } from 'react-icons/fa';
 import { AiFillGithub } from 'react-icons/ai';
-import transitionHOC from 'App/components/transitionHOC';
+import transitionHOC, { TransitionTypes } from 'App/components/transitionHOC';
 
 import { Title, Description } from 'App/components/Styled';
 
@@ -75,25 +75,27 @@ const Routes = withRouter(({ location, onRouteChange }: any) => {
         onRouteChange(pathname);
     }, [pathname, onRouteChange]);
 
-    return transitionHOC(pathname.split('/').filter((x: string) => x !== '')[0] || "Home")(
-        <Switch location={location}>
-            <Route path="/basics">
-                <Basics />
-            </Route>
-            <Route path="/charts">
-                <Charts />
-            </Route>
-            <Route path="/geo">
-                <Geo />
-            </Route>
-            <Route path="/customvisualizations">
-                <CustomVisualizations />
-            </Route>
-            <Route exact path="/">
-                <Home />
-            </Route>
-        </Switch>
-    )
+    return transitionHOC(
+        pathname.split('/').filter((x: string) => x !== '')[0] || "Home",
+        TransitionTypes.Fade)(
+            <Switch location={location}>
+                <Route path="/basics">
+                    <Basics />
+                </Route>
+                <Route path="/charts">
+                    <Charts />
+                </Route>
+                <Route path="/geo">
+                    <Geo />
+                </Route>
+                <Route path="/customvisualizations">
+                    <CustomVisualizations />
+                </Route>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+            </Switch>
+        )
 });
 
 const AppWrapper = styled.section`
@@ -189,21 +191,16 @@ const Header = styled.header`
     align-items: center;
     justify-content:center;
     opacity: ${props => props.theme.expanded ? 0 : 1};
+    color: ${blue};
+    text-align: center;
     transition: opacity .3s ease-in-out;
 
     ${Title}{
-        font-weight: 600;
-        font-size: 1.3rem;
-        color: ${blue};
         margin-bottom: .8em;
     }
 
     ${Description}{
-        font-size: 1.1rem;
-        font-weight: 400;
         max-width: 400px;
-        text-align: center;
-        color: ${blue};
         margin-bottom: .8em;
     }
 `;

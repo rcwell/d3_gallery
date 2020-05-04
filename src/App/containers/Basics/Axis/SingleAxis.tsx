@@ -5,7 +5,7 @@ import { MainRoute } from '../index';
 
 export const SingleAxis = ({ location: { pathname } }: any) => {
     const routes = [
-        ...MainRoute,
+        MainRoute,
         {
             path: pathname,
             displayname: "single-axis"
