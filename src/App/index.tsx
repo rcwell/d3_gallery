@@ -1,22 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import Home from 'App/containers/Home';
+import { black, blue, lightBlue, red, orange, green } from 'App/components/Colors';
+import transitionHOC, { TransitionTypes } from 'App/components/transitionHOC';
+import { Title, Description } from 'App/components/Styled';
+import { FaExpandAlt, FaCompressAlt } from 'react-icons/fa';
+import { AiFillGithub } from 'react-icons/ai';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     withRouter
 } from "react-router-dom";
-import Basics from 'App/containers/Basics';
-import Charts from 'App/containers/Charts';
-import Geo from 'App/containers/Geo';
-import CustomVisualizations from 'App/containers/CustomVisualizations';
-import { black, blue, lightBlue, red, orange, green } from 'App/components/Colors';
-import { FaExpandAlt, FaCompressAlt } from 'react-icons/fa';
-import { AiFillGithub } from 'react-icons/ai';
-import transitionHOC, { TransitionTypes } from 'App/components/transitionHOC';
 
-import { Title, Description } from 'App/components/Styled';
+const CustomVisualizations = React.lazy(() => import('App/containers/CustomVisualizations'));
+const Basics = React.lazy(() => import('App/containers/Basics'));
+const Charts = React.lazy(() => import('App/containers/Charts'));
+const Home = React.lazy(() => import('App/containers/Home'));
+// const Geo = React.lazy(() => import('App/containers/Geo'));
+
+// Lazy Load with 3 sec delay
+const Geo = React.lazy(() => new Promise(resolve => {
+    setTimeout(() => resolve(import("App/containers/Geo") as any), 3000);
+}));
 
 const App = () => {
     const [isExpanded, setExpanded] = React.useState(Boolean);
@@ -78,23 +83,25 @@ const Routes = withRouter(({ location, onRouteChange }: any) => {
     return transitionHOC(
         pathname.split('/').filter((x: string) => x !== '')[0] || "Home",
         TransitionTypes.Fade)(
-            <Switch location={location}>
-                <Route path="/basics">
-                    <Basics />
-                </Route>
-                <Route path="/charts">
-                    <Charts />
-                </Route>
-                <Route path="/geo">
-                    <Geo />
-                </Route>
-                <Route path="/customvisualizations">
-                    <CustomVisualizations />
-                </Route>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-            </Switch>
+            <React.Suspense fallback={"Loading..."}>
+                <Switch location={location}>
+                    <Route path="/basics">
+                        <Basics />
+                    </Route>
+                    <Route path="/charts">
+                        <Charts />
+                    </Route>
+                    <Route path="/geo">
+                        <Geo />
+                    </Route>
+                    <Route path="/customvisualizations">
+                        <CustomVisualizations />
+                    </Route>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </React.Suspense>
         )
 });
 
