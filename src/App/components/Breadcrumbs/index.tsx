@@ -6,27 +6,25 @@ import { Link } from "react-router-dom";
 import { black, gray, blue } from 'App/components/Colors';
 import { BreadcrumbProps, CrumbLink } from 'App/interface';
 
-const BreadCrumbs = ({ links }: BreadcrumbProps) => {
-    return (
-        <CrumbsContainer>
+const BreadCrumbs = ({ links }: BreadcrumbProps) => (
+    <CrumbsContainer>
+        <HomeCrumbLink />
+        {links.map(renderLink)}
+    </CrumbsContainer>
+);
 
-            <div key={"/"}>
-                <AiFillHome style={{ marginRight: 10 }} />
-                <Link to={"/"}>HOME</Link>
-            </div>
-            {
-                links.map(({ path, displayname }: CrumbLink) => {
-                    return (
-                        <div key={path}>
-                            <GoChevronRight size={20} strokeWidth={0.5} style={{ margin: "0 10px" }} stroke={black} fill={black} />
-                            <Link key={path} to={path}>{displayname.toUpperCase()}</Link>
-                        </div>
-                    )
-                })
-            }
-        </CrumbsContainer>
-    );
-};
+const HomeCrumbLink = () => (
+    <div key={"/"}>
+        <AiFillHome style={{ marginRight: 10 }} />
+        <Link to={"/"}>HOME</Link>
+    </div>
+);
+const renderLink = ({ path, displayname }: CrumbLink) => (
+    <div key={path}>
+        <GoChevronRight size={20} strokeWidth={0.5} style={{ margin: "0 10px" }} stroke={black} fill={black} />
+        <Link key={path} to={path}>{displayname.toUpperCase()}</Link>
+    </div>
+)
 
 const CrumbsContainer = styled.section`
 color: ${blue};

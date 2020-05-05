@@ -5,7 +5,6 @@ const ScrollableSection = styled.section`
     height: 100%;
     overflow: auto;
     color: ${black};
-
 `;
 const Body = styled.section`
     display: flex;

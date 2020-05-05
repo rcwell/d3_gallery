@@ -2,6 +2,7 @@ import React from 'react';
 import Section from 'App/components/Section';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import RouteWrapper from 'App/components/RouteWrapper';
+import { LineCharts, AreaCharts, BarCharts, ScatterCharts, PieCharts, RadarCharts, HeatmapCharts } from 'App/data';
 import { CardProps } from 'App/interface';
 import * as Line from './Line';
 import * as Area from './Area';
@@ -10,7 +11,6 @@ import * as Heatmap from './Heatmap';
 import * as Pie from './Pie';
 import * as Radar from './Radar';
 import * as Scatter from './Scatter';
-import { LineCharts, AreaCharts, BarCharts, ScatterCharts, PieCharts, RadarCharts, HeatmapCharts } from 'App/data';
 
 export const MainRoute = {
     path: `/charts`,
@@ -26,7 +26,7 @@ const Charts = () => {
         push({
             ...location,
             pathname: `${url}/${d.path}`,
-            state: { ...location.state, data: true }
+            state: { ...location.state }
         });
     };
 
