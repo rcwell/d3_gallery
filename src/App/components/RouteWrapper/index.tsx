@@ -17,7 +17,9 @@ const RouteWrapper = ({ title, description, route, children }: any) => {
         return () => {
             if (ref) {
                 const { scrollTop } = ref;
-                setScrollPosition(scrollTop);
+                if(scrollTop !== scrollPosition){
+                    setScrollPosition(scrollTop);
+                }
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
