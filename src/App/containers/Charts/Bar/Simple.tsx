@@ -42,14 +42,13 @@ export const Simple = ({ location: { pathname } }: any) => {
 
     /** ValueGetters **/
     const xValue = (d: Sales): any => d.value;
-    const yValue = (d: Sales): any => d.month;
 
     /** Scalers **/
     const xScale = scaleLinear()
         .domain([0, max(data, xValue) || 0])
         .range([0, width - margin.left - margin.right]);
     const yScale = scaleBand()
-        .domain(data.map(yValue))
+        .domain(months)
         .range([0, height - margin.top - margin.bottom])
         .padding(0.1);
 
