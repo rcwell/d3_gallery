@@ -173,9 +173,6 @@ const BarRoutes = () => {
             <Route
                 path={`${path}/stacked`}
                 component={Bar.Stacked} />
-            <Route
-                path={`${path}/time-series`}
-                component={Bar.TimeSeries} />
         </Switch>
     )
 }

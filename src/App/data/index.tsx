@@ -257,13 +257,6 @@ const BarCharts: Array<RouteCardProps> = [
         }
     },
     {
-        title: 'time-series',
-        description: 'Lorem ipsum dolor sith amet',
-        d:{
-            path:'bar/time-series'
-        }
-    },
-    {
         title: 'Radial',
         description: 'Lorem ipsum dolor sith amet',
         d:{
