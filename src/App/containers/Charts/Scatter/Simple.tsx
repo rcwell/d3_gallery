@@ -80,8 +80,7 @@ export const Simple = ({ location: { pathname } }: any) => {
         const margin: Margin = { top: 60, right: 20, bottom: 60, left: 100 };
         const innerWidth = size.width - (margin.left + margin.right);
         const innerHeight = size.height - (margin.top + margin.bottom);
-        const minCircleRadius = 10;
-        const maxCircleRadius = 30;
+        const circleRadius = 10;
 
         /**  Value Accessors **/
         const xValue = (d: any) => d[x.key];
@@ -120,18 +119,6 @@ export const Simple = ({ location: { pathname } }: any) => {
             .attr('cx', d => xScale(xValue(d)))
             .attr('r', 0);
 
-        const axesMultiplier = (d: Car) => +d[x.key as keyof Car] * +d[y.key as keyof Car];
-        const vals = data.reduce((vals: Array<any>, curr) => {
-            return [
-                ...vals,
-                axesMultiplier(curr)
-            ];
-        }, []);
-
-        let scale = d3.scaleLinear()
-            .domain(d3.extent(vals) as [number, number])
-            .range([minCircleRadius, maxCircleRadius]);
-
         circleNode
             .merge(circles)
             .on('mousemove', showTooptip)
@@ -140,7 +127,7 @@ export const Simple = ({ location: { pathname } }: any) => {
             .duration(1000)
             .attr('cy', d => yScale(yValue(d)) || 0)
             .attr('cx', d => xScale(xValue(d)))
-            .attr('r', d => scale(axesMultiplier(d)));
+            .attr('r', circleRadius);
 
         circles
             .exit()
