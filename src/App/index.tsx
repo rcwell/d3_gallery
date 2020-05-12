@@ -188,6 +188,7 @@ ViewPort.defaultProps = {
 };
 const Header = styled.header`
     display: flex;
+    pointer-events: ${props => props.theme.expanded ? "none" : "all"};
     position: absolute;
     top: 0;
     left: 0;

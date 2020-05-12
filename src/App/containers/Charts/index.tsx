@@ -222,9 +222,6 @@ const RadarRoutes = () => {
                 path={`${path}/simple`}
                 component={Radar.Simple} />
             <Route
-                path={`${path}/multiple-datasets`}
-                component={Radar.MultipleDatasets} />
-            <Route
                 path={`${path}/color-fill`}
                 component={Radar.ColorFill} />
         </Switch>

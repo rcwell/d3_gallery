@@ -326,13 +326,6 @@ const RadarCharts: Array<RouteCardProps> = [
         }
     },
     {
-        title: 'Multiple Datasets',
-        description: 'Lorem ipsum dolor sith amet',
-        d:{
-            path:'radar/multiple-datasets'
-        }
-    },
-    {
         title: 'Color Fill Polygon',
         description: 'Lorem ipsum dolor sith amet',
         d:{
