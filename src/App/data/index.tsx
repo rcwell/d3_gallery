@@ -329,7 +329,7 @@ const RadarCharts: Array<RouteCardProps> = [
         title: 'Color Fill Polygon',
         description: 'Lorem ipsum dolor sith amet',
         d:{
-            path:'radar/color-fill-polygon'
+            path:'radar/color-fill'
         }
     }
 ];
