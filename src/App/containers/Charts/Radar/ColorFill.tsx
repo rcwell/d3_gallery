@@ -7,60 +7,42 @@ import * as d3 from 'd3';
 
 const data = [
     [{
-        axis: "A",
-        value: 6
-    }, {
-        axis: "B",
-        value: 4
-    }, {
-        axis: "C",
-        value: 6
-    }, {
-        axis: "D",
-        value: 5.5
-    }, {
-        axis: "E",
+        axis: "Monday",
         value: 8
     }, {
-        axis: "F",
+        axis: "Tuesday",
         value: 7
     }, {
-        axis: "G",
-        value: 9
+        axis: "Wednesday",
+        value: 6
     }, {
-        axis: "H",
-        value: 10
+        axis: "Thursday",
+        value: 4
     }, {
-        axis: "I",
-        value: 3.5
+        axis: "Friday",
+        value: 2
+    }, {
+        axis: "Saturday",
+        value: 2
     }],
     [{
-        axis: "A",
+        axis: "Monday",
         value: 2
     }, {
-        axis: "B",
-        value: 7
-    }, {
-        axis: "C",
-        value: 4
-    }, {
-        axis: "D",
-        value: 8.7
-    }, {
-        axis: "E",
+        axis: "Tuesday",
         value: 2
     }, {
-        axis: "F",
-        value: 5
+        axis: "Wednesday",
+        value: 6
     }, {
-        axis: "G",
-        value: 8
+        axis: "Thursday",
+        value: 8.5
     }, {
-        axis: "H",
-        value: 2
-    }, {
-        axis: "I",
+        axis: "Friday",
         value: 9
+    }, {
+        axis: "Saturday",
+        value: 10
     }]
 ];
 
