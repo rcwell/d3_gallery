@@ -5,6 +5,7 @@ import { MainRoute } from '../index';
 import * as d3 from 'd3';
 import { Dropdown } from 'App/components/Dropdown'
 import styled from 'styled-components';
+import { data as carData } from './data';
 
 interface Car {
     mpg: number;
@@ -39,18 +40,9 @@ export const Simple = ({ location: { pathname } }: any) => {
     });
 
     React.useEffect(() => {
-        d3.csv('https://vizhub.com/curran/datasets/auto-mpg.csv').then((data: any) => {
-            setData(data.slice(0, 50).map((d: Car) => ({
-                mpg: +d.mpg,
-                cylinders: +d.cylinders,
-                displacement: +d.displacement,
-                horsepower: +d.horsepower,
-                weight: +d.weight,
-                acceleration: +d.acceleration,
-                year: +d.year
-            })));
-            setIsDataLoaded(true);
-        });
+        const _data: Array<Car> = carData.slice(0, 50);
+        setData(_data);
+        setIsDataLoaded(true);
     }, []);
 
 
