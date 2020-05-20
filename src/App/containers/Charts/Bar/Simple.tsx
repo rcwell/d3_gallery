@@ -2,93 +2,23 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
 import { MainRoute } from '../index';
-import {
-    select,
-    scaleLinear,
-    axisBottom,
-    axisLeft,
-    scaleBand,
-    Selection,
-    max
-} from 'd3';
+import { Bar } from 'App/components/Charts';
 import { randomNum } from 'App/utils';
 
-interface Margin {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-}
-interface Sales {
-    month: string;
-    value: number;
-}
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septment", "October", "November", "December"];
 
-const margin: Margin = { top: 60, right: 20, bottom: 60, left: 100 };
-const height = 500;
-const width = 800;
 export const Simple = ({ location: { pathname } }: any) => {
-    const svgRef = React.useRef<SVGSVGElement>(null);
-    const [data, setData] = React.useState<Array<Sales>>(Array);
+    const [data, setData] = React.useState<Array<any>>([]);
 
     React.useEffect(() => {
-        const sales = months.map(month => ({
-            month,
-            value: randomNum(1, 100)
-        }));
-        setData(sales);
-    }, []);
-
-    /** ValueGetters **/
-    const xValue = (d: Sales): any => d.value;
-
-    /** Scalers **/
-    const xScale = scaleLinear()
-        .domain([0, max(data, xValue) || 0])
-        .range([0, width - margin.left - margin.right]);
-    const yScale = scaleBand()
-        .domain(months)
-        .range([0, height - margin.top - margin.bottom])
-        .padding(0.1);
-
-    /** Draw X&Y Axis **/
-    const drawAxis = React.useCallback((container: Selection<SVGGElement, unknown, null, undefined>) => {
-        const innerHeight = height - margin.top - margin.bottom;
-        container.select('.x-axis')
-            .call(axisBottom(xScale) as any)
-            .attr('transform', `translate(0,${innerHeight})`);
-        container.select('.y-axis')
-            .call(axisLeft(yScale) as any)
-    }, [xScale, yScale]);
-
-    /** Draw BarPath **/
-    const drawBarPath = React.useCallback((container: Selection<SVGGElement, unknown, null, undefined>) => {
-        const barData: Array<Sales> = data;
-        const barGroup = container.selectAll<SVGPathElement, null>('rect');
-        const barGroupData = barGroup.data(barData);
-
-        barGroupData
-            .enter()
-            .append('rect')
-            .attr('fill', 'cornflowerblue')
-            .attr('y', d => yScale(d.month)!)
-            .attr('width', d => xScale(d.value))
-            .attr('height', yScale.bandwidth());
-    }, [data, xScale, yScale])
-
-    React.useEffect(() => {
-        if (svgRef.current === null) return;
-        const _svg = select(svgRef.current);
-
-        const axisGroup = _svg.select<SVGGElement>('.axisGroup')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-        drawAxis(axisGroup);
-        const barGroup = _svg.select<SVGGElement>('.barGroup')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-        drawBarPath(barGroup);
-    }, [svgRef, data, drawAxis, drawBarPath]);
-
+        setData(Array(1).fill(0).map((_, i) => ({
+            name: `Dataset_${i + 1}`,
+            data: months.map((month) => ({
+                y: month,
+                x: randomNum(50, 80)
+            }))
+        })))
+    }, [])
 
     return (
         <RouteWrapper
@@ -98,14 +28,42 @@ export const Simple = ({ location: { pathname } }: any) => {
                 displayname: "simple"
             }]}
             description={"Lorem ipsum dolor sith amet"}>
-            <svg width={800} height={500} ref={svgRef}>
-                <g className={"barGroup"} />
-                <g className={"axisGroup"}>
-                    <g className={"x-axis"} />
-                    <g className={"y-axis"} />
-                </g>
-                <g className={"titleGroup"} />
-            </svg>
+            <Bar
+                margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
+                height={500}
+                width={800}
+                series={data}
+                title={{
+                    text: 'Sales',
+                    align: 'middle',
+                    location: 'top'
+                }}
+                yaxis={{
+                    title: {
+                        text: 'Months',
+                        align: 'middle'
+                    },
+                    categories: months
+                }}
+                xaxis={{
+                    title: {
+                        text: "Quantity",
+                        align: 'middle'
+                    },
+                    min: 40,
+                    max: 80
+                }}
+                legend={{
+                    location: 'left',
+                    align: 'start',
+                }}
+                colorsScheme={[
+                    "#6494ED",
+                    "#ffcf00",
+                    "#FFA15C",
+                    "#FFC65C",
+                ]}
+            />
         </RouteWrapper>
     )
 }

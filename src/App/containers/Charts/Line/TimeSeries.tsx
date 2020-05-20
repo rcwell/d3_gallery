@@ -1,138 +1,26 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
 import { MainRoute } from '../index';
-import {
-    select,
-    scaleLinear,
-    axisBottom,
-    axisLeft,
-    Selection,
-    line,
-    curveBasis,
-    scaleTime,
-    extent
-} from 'd3';
-
-interface Margin {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-}
-interface Temperature {
-    timestamp: Date;
-    value: number;
-}
-
-const margin: Margin = { top: 60, right: 20, bottom: 60, left: 100 };
-const height = 500;
-const width = 800;
+import { LineChart } from 'App/components/Charts';
 
 export const TimeSeries = ({ location: { pathname } }: any) => {
-    const svgRef = React.useRef<SVGSVGElement>(null);
-
-    const [data, setData] = React.useState<Array<Temperature>>(Array);
+    const [data, setData] = React.useState<Array<any>>(Array);
 
     React.useEffect(() => {
-        setData(_data.map((d: any) => ({
-            timestamp: new Date(d.timestamp),
-            value: +d.temperature
-        })));
+        const baseDate = new Date(2020, 0, 1, 0, 0, 0);
+        const date = baseDate.getDate();
+        const seriesCount = 2;
+        const dateCount = 29;
+
+        const __data = Array(seriesCount).fill(0).map((_, i) => ({
+            name: `Location__${i+1}`,
+            data: Array(dateCount).fill(0).map((_, j) => ({
+                x: new Date(new Date(baseDate).setDate(date + j)),
+                y: temperatures[(i * dateCount) + j]
+            }))
+        }));
+        setData(__data);
     }, []);
-
-    /** ValueGetters **/
-    const xValue = (d: Temperature): any => d.timestamp;
-    const yValue = (d: Temperature): any => d.value;
-    const yAxisLabel = 'Temperature';
-    const xAxisLabel = 'Time';
-
-    /** Scalers **/
-    const xScale = scaleTime()
-        .domain((extent(data, xValue) as [number, number]))
-        .range([0, width - margin.left - margin.right]);
-    const yScale = scaleLinear()
-        .domain((extent(data, yValue) as [number, number]))
-        .range([height - margin.top - margin.bottom, 0])
-        .nice();
-
-    /** Draw X&Y Axis **/
-    const drawAxis = React.useCallback((container: Selection<SVGGElement, unknown, null, undefined>) => {
-        const innerHeight = height - margin.top - margin.bottom;
-        const innerWidth = width - margin.left - margin.right;
-
-        const xAxis = axisBottom(xScale)
-            .tickSize(-innerHeight)
-            .tickPadding(15);
-        const yAxis = axisLeft(yScale)
-            .tickSize(-innerWidth)
-            .tickPadding(15);
-
-        const xAxisGroup = container.select<SVGGElement>('.x-axis')
-            .call(xAxis)
-            .attr('transform', `translate(0,${innerHeight})`);
-        const yAxisGroup = container.select<SVGGElement>('.y-axis')
-            .call(yAxis);
-
-        yAxisGroup
-            .append('text')
-            .text(yAxisLabel)
-            .attr('fill', 'currentColor')
-            .attr('y', -50)
-            .attr('x', -innerHeight / 2)
-            .attr('font-size', '1.3em')
-            .attr('text-anchor', 'middle')
-            .attr('transform', 'rotate(-90)');
-        xAxisGroup
-            .append('text')
-            .text(xAxisLabel)
-            .attr('fill', 'currentColor')
-            .attr('y', 50)
-            .attr('x', innerWidth / 2)
-            .attr('font-size', '1.3em');
-
-        container.selectAll('path')
-            .attr('stroke', "#636363");
-
-        container
-            .selectAll('.domain')
-            .remove();
-    }, [xScale, yScale]);
-
-    /** LinePath Generator **/
-    const lineGenerator = line()
-        .x((d: any) => xScale(xValue(d)))
-        .y((d: any) => yScale(yValue(d)))
-        .curve(curveBasis);
-
-    /** Draw LinePath **/
-    const drawLinePath = React.useCallback((container: Selection<SVGGElement, unknown, null, undefined>) => {
-        const lineData: any = data;
-        const lineGroup = container.selectAll<SVGPathElement, null>('path');
-        const lineGroupData = lineGroup.data([lineData]);
-
-        lineGroupData
-            .enter()
-            .append('path')
-            .merge(lineGroupData)
-            .attr('d', lineGenerator(lineData) || "")
-            .attr('fill', 'none')
-            .attr('stroke', 'cornflowerblue')
-            .attr('stroke-width', '3')
-            .attr('stroke-linejoin', 'round')
-            .attr('stroke-linecap', 'round')
-    }, [data, lineGenerator])
-
-    React.useEffect(() => {
-        if (svgRef.current === null) return;
-        const _svg = select(svgRef.current);
-
-        const axisGroup = _svg.select<SVGGElement>('.axisGroup')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-        drawAxis(axisGroup);
-        const lineGroup = _svg.select<SVGGElement>('.lineGroup')
-            .attr('transform', `translate(${margin.left},${margin.top})`);
-        drawLinePath(lineGroup);
-    }, [svgRef, data, drawAxis, drawLinePath]);
 
     return (
         <RouteWrapper
@@ -142,693 +30,215 @@ export const TimeSeries = ({ location: { pathname } }: any) => {
                 displayname: "timeseries"
             }]}
             description={"Lorem ipsum dolor sith amet"}>
-            <svg width={800} height={500} ref={svgRef}>
-                <g className={"lineGroup"} />
-                <g className={"axisGroup"}>
-                    <g className={"x-axis"} />
-                    <g className={"y-axis"} />
-                </g>
-                <g className={"titleGroup"} />
-            </svg>
+            <LineChart
+                margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
+                height={500}
+                width={800}
+                series={data}
+                title={{
+                    text: 'A Month of Temparature',
+                    align: 'middle',
+                    location: 'top'
+                }}
+                xaxis={{
+                    title: {
+                        text: 'Timestamp',
+                        align: 'middle'
+                    },
+                    datetime: true
+                }}
+                yaxis={{
+                    title: {
+                        text: "Temperature",
+                        align: 'middle'
+                    },
+                }}
+                stroke={{
+                    curve:'smooth'
+                }}
+                legend={{
+                    location: 'left',
+                    align: 'start',
+                }}
+                colorsScheme={[
+                    "#6494ED",
+                    "#ffcf00",
+                    "#FFA15C",
+                    "#FFC65C",
+                ]}
+            />
         </RouteWrapper>
     )
 }
 
-const _data = [
-    {
-        timestamp: "2015-03-20T21:00:00.000Z",
-        temperature: 23.9516625615764
-    },
-    {
-        timestamp: "2015-03-20T22:00:00.000Z",
-        temperature: 23.0728888291688
-    },
-    {
-        timestamp: "2015-03-20T23:00:00.000Z",
-        temperature: 22.2708190476318
-    },
-    {
-        timestamp: "2015-03-21T00:00:00.000Z",
-        temperature: 21.3394373423804
-    },
-    {
-        timestamp: "2015-03-21T01:00:00.000Z",
-        temperature: 20.1010743049325
-    },
-    {
-        timestamp: "2015-03-21T02:00:00.000Z",
-        temperature: 18.4150717551479
-    },
-    {
-        timestamp: "2015-03-21T03:00:00.000Z",
-        temperature: 17.7483817583905
-    },
-    {
-        timestamp: "2015-03-21T04:00:00.000Z",
-        temperature: 17.6589726749868
-    },
-    {
-        timestamp: "2015-03-21T05:00:00.000Z",
-        temperature: 17.0922334804965
-    },
-    {
-        timestamp: "2015-03-21T06:00:00.000Z",
-        temperature: 17.9022626474071
-    },
-    {
-        timestamp: "2015-03-21T07:00:00.000Z",
-        temperature: 17.9134315019288
-    },
-    {
-        timestamp: "2015-03-21T08:00:00.000Z",
-        temperature: 17.9623415917395
-    },
-    {
-        timestamp: "2015-03-21T09:00:00.000Z",
-        temperature: 18.6299049947767
-    },
-    {
-        timestamp: "2015-03-21T10:00:00.000Z",
-        temperature: 18.7246461115231
-    },
-    {
-        timestamp: "2015-03-21T11:00:00.000Z",
-        temperature: 18.3452032121395
-    },
-    {
-        timestamp: "2015-03-21T12:00:00.000Z",
-        temperature: 17.9509405148159
-    },
-    {
-        timestamp: "2015-03-21T13:00:00.000Z",
-        temperature: 17.6459367384257
-    },
-    {
-        timestamp: "2015-03-21T14:00:00.000Z",
-        temperature: 18.0026108196051
-    },
-    {
-        timestamp: "2015-03-21T15:00:00.000Z",
-        temperature: 18.6413944821435
-    },
-    {
-        timestamp: "2015-03-21T16:00:00.000Z",
-        temperature: 19.3671431509997
-    },
-    {
-        timestamp: "2015-03-21T17:00:00.000Z",
-        temperature: 20.8082012083461
-    },
-    {
-        timestamp: "2015-03-21T18:00:00.000Z",
-        temperature: 22.5238576663828
-    },
-    {
-        timestamp: "2015-03-21T19:00:00.000Z",
-        temperature: 24.4214051463704
-    },
-    {
-        timestamp: "2015-03-21T20:00:00.000Z",
-        temperature: 26.2049693716955
-    },
-    {
-        timestamp: "2015-03-21T21:00:00.000Z",
-        temperature: 26.579802484894
-    },
-    {
-        timestamp: "2015-03-21T22:00:00.000Z",
-        temperature: 26.5525094442272
-    },
-    {
-        timestamp: "2015-03-21T23:00:00.000Z",
-        temperature: 23.9758724990251
-    },
-    {
-        timestamp: "2015-03-22T00:00:00.000Z",
-        temperature: 20.7705334007582
-    },
-    {
-        timestamp: "2015-03-22T01:00:00.000Z",
-        temperature: 19.5826361563267
-    },
-    {
-        timestamp: "2015-03-22T02:00:00.000Z",
-        temperature: 18.7265399946616
-    },
-    {
-        timestamp: "2015-03-22T03:00:00.000Z",
-        temperature: 18.2886029132647
-    },
-    {
-        timestamp: "2015-03-22T04:00:00.000Z",
-        temperature: 17.4904771411586
-    },
-    {
-        timestamp: "2015-03-22T05:00:00.000Z",
-        temperature: 17.1831430954037
-    },
-    {
-        timestamp: "2015-03-22T06:00:00.000Z",
-        temperature: 17.2898856656444
-    },
-    {
-        timestamp: "2015-03-22T07:00:00.000Z",
-        temperature: 17.8578100360021
-    },
-    {
-        timestamp: "2015-03-22T08:00:00.000Z",
-        temperature: 18.1992192220978
-    },
-    {
-        timestamp: "2015-03-22T09:00:00.000Z",
-        temperature: 18.13420905954
-    },
-    {
-        timestamp: "2015-03-22T10:00:00.000Z",
-        temperature: 18.5888149684944
-    },
-    {
-        timestamp: "2015-03-22T11:00:00.000Z",
-        temperature: 18.6733003026984
-    },
-    {
-        timestamp: "2015-03-22T12:00:00.000Z",
-        temperature: 19.1600833190036
-    },
-    {
-        timestamp: "2015-03-22T13:00:00.000Z",
-        temperature: 19.207095797011
-    },
-    {
-        timestamp: "2015-03-22T14:00:00.000Z",
-        temperature: 18.9847082241235
-    },
-    {
-        timestamp: "2015-03-22T15:00:00.000Z",
-        temperature: 19.4293802064908
-    },
-    {
-        timestamp: "2015-03-22T16:00:00.000Z",
-        temperature: 20.8493124700409
-    },
-    {
-        timestamp: "2015-03-22T17:00:00.000Z",
-        temperature: 21.5898145184046
-    },
-    {
-        timestamp: "2015-03-22T18:00:00.000Z",
-        temperature: 22.3397182467298
-    },
-    {
-        timestamp: "2015-03-22T19:00:00.000Z",
-        temperature: 22.7891858876349
-    },
-    {
-        timestamp: "2015-03-22T20:00:00.000Z",
-        temperature: 23.3412628564144
-    },
-    {
-        timestamp: "2015-03-22T21:00:00.000Z",
-        temperature: 23.4926420057589
-    },
-    {
-        timestamp: "2015-03-22T22:00:00.000Z",
-        temperature: 23.0962283240861
-    },
-    {
-        timestamp: "2015-03-22T23:00:00.000Z",
-        temperature: 22.2667502918227
-    },
-    {
-        timestamp: "2015-03-23T00:00:00.000Z",
-        temperature: 21.0266142557277
-    },
-    {
-        timestamp: "2015-03-23T01:00:00.000Z",
-        temperature: 20.0093349857605
-    },
-    {
-        timestamp: "2015-03-23T02:00:00.000Z",
-        temperature: 18.9851414732381
-    },
-    {
-        timestamp: "2015-03-23T03:00:00.000Z",
-        temperature: 18.5245615004214
-    },
-    {
-        timestamp: "2015-03-23T04:00:00.000Z",
-        temperature: 18.290694254732
-    },
-    {
-        timestamp: "2015-03-23T05:00:00.000Z",
-        temperature: 18.0595508666643
-    },
-    {
-        timestamp: "2015-03-23T06:00:00.000Z",
-        temperature: 18.4732789951039
-    },
-    {
-        timestamp: "2015-03-23T07:00:00.000Z",
-        temperature: 18.7258481532495
-    },
-    {
-        timestamp: "2015-03-23T08:00:00.000Z",
-        temperature: 18.5595128641976
-    },
-    {
-        timestamp: "2015-03-23T09:00:00.000Z",
-        temperature: 18.179674037842
-    },
-    {
-        timestamp: "2015-03-23T10:00:00.000Z",
-        temperature: 17.7681299392415
-    },
-    {
-        timestamp: "2015-03-23T11:00:00.000Z",
-        temperature: 17.443021321053
-    },
-    {
-        timestamp: "2015-03-23T12:00:00.000Z",
-        temperature: 17.3451205175492
-    },
-    {
-        timestamp: "2015-03-23T13:00:00.000Z",
-        temperature: 17.4374701133724
-    },
-    {
-        timestamp: "2015-03-23T14:00:00.000Z",
-        temperature: 17.8929191631296
-    },
-    {
-        timestamp: "2015-03-23T15:00:00.000Z",
-        temperature: 18.9122039984753
-    },
-    {
-        timestamp: "2015-03-23T16:00:00.000Z",
-        temperature: 19.6161969984469
-    },
-    {
-        timestamp: "2015-03-23T17:00:00.000Z",
-        temperature: 20.7299868156002
-    },
-    {
-        timestamp: "2015-03-23T18:00:00.000Z",
-        temperature: 21.7689130719553
-    },
-    {
-        timestamp: "2015-03-23T19:00:00.000Z",
-        temperature: 22.5533898355016
-    },
-    {
-        timestamp: "2015-03-23T20:00:00.000Z",
-        temperature: 22.8372668296634
-    },
-    {
-        timestamp: "2015-03-23T21:00:00.000Z",
-        temperature: 23.2014773800322
-    },
-    {
-        timestamp: "2015-03-23T22:00:00.000Z",
-        temperature: 22.5682062882985
-    },
-    {
-        timestamp: "2015-03-23T23:00:00.000Z",
-        temperature: 22.3205675513796
-    },
-    {
-        timestamp: "2015-03-24T00:00:00.000Z",
-        temperature: 20.8661118605035
-    },
-    {
-        timestamp: "2015-03-24T01:00:00.000Z",
-        temperature: 18.5360183512352
-    },
-    {
-        timestamp: "2015-03-24T02:00:00.000Z",
-        temperature: 17.5156724451801
-    },
-    {
-        timestamp: "2015-03-24T03:00:00.000Z",
-        temperature: 17.2066897483676
-    },
-    {
-        timestamp: "2015-03-24T04:00:00.000Z",
-        temperature: 17.1974604599623
-    },
-    {
-        timestamp: "2015-03-24T05:00:00.000Z",
-        temperature: 17.3377835934013
-    },
-    {
-        timestamp: "2015-03-24T06:00:00.000Z",
-        temperature: 17.28662295757
-    },
-    {
-        timestamp: "2015-03-24T07:00:00.000Z",
-        temperature: 17.4291104924263
-    },
-    {
-        timestamp: "2015-03-24T08:00:00.000Z",
-        temperature: 17.4228793012653
-    },
-    {
-        timestamp: "2015-03-24T09:00:00.000Z",
-        temperature: 17.4209561166271
-    },
-    {
-        timestamp: "2015-03-24T10:00:00.000Z",
-        temperature: 17.141757829703
-    },
-    {
-        timestamp: "2015-03-24T11:00:00.000Z",
-        temperature: 17.3048584589793
-    },
-    {
-        timestamp: "2015-03-24T12:00:00.000Z",
-        temperature: 17.337482794781
-    },
-    {
-        timestamp: "2015-03-24T13:00:00.000Z",
-        temperature: 17.7016509341158
-    },
-    {
-        timestamp: "2015-03-24T14:00:00.000Z",
-        temperature: 17.5637528905341
-    },
-    {
-        timestamp: "2015-03-24T15:00:00.000Z",
-        temperature: 18.8276163388499
-    },
-    {
-        timestamp: "2015-03-24T16:00:00.000Z",
-        temperature: 19.4404648699534
-    },
-    {
-        timestamp: "2015-03-24T17:00:00.000Z",
-        temperature: 20.5646049670802
-    },
-    {
-        timestamp: "2015-03-24T18:00:00.000Z",
-        temperature: 21.9525507884113
-    },
-    {
-        timestamp: "2015-03-24T19:00:00.000Z",
-        temperature: 21.9040221846194
-    },
-    {
-        timestamp: "2015-03-24T20:00:00.000Z",
-        temperature: 22.8197541616282
-    },
-    {
-        timestamp: "2015-03-24T21:00:00.000Z",
-        temperature: 22.2390831913042
-    },
-    {
-        timestamp: "2015-03-24T22:00:00.000Z",
-        temperature: 22.4688244906963
-    },
-    {
-        timestamp: "2015-03-24T23:00:00.000Z",
-        temperature: 21.9461828791739
-    },
-    {
-        timestamp: "2015-03-25T00:00:00.000Z",
-        temperature: 21.3218883084538
-    },
-    {
-        timestamp: "2015-03-25T01:00:00.000Z",
-        temperature: 19.9688738415096
-    },
-    {
-        timestamp: "2015-03-25T02:00:00.000Z",
-        temperature: 18.9409031033049
-    },
-    {
-        timestamp: "2015-03-25T03:00:00.000Z",
-        temperature: 18.1829931467353
-    },
-    {
-        timestamp: "2015-03-25T04:00:00.000Z",
-        temperature: 17.6071132686007
-    },
-    {
-        timestamp: "2015-03-25T05:00:00.000Z",
-        temperature: 17.4155712472229
-    },
-    {
-        timestamp: "2015-03-25T06:00:00.000Z",
-        temperature: 17.8112238813252
-    },
-    {
-        timestamp: "2015-03-25T07:00:00.000Z",
-        temperature: 18.0118371454174
-    },
-    {
-        timestamp: "2015-03-25T08:00:00.000Z",
-        temperature: 17.9925110740977
-    },
-    {
-        timestamp: "2015-03-25T09:00:00.000Z",
-        temperature: 17.9146107460869
-    },
-    {
-        timestamp: "2015-03-25T10:00:00.000Z",
-        temperature: 17.6354297651737
-    },
-    {
-        timestamp: "2015-03-25T11:00:00.000Z",
-        temperature: 17.2990959392658
-    },
-    {
-        timestamp: "2015-03-25T12:00:00.000Z",
-        temperature: 16.8942534144482
-    },
-    {
-        timestamp: "2015-03-25T13:00:00.000Z",
-        temperature: 17.0215911252788
-    },
-    {
-        timestamp: "2015-03-25T14:00:00.000Z",
-        temperature: 17.5370547200027
-    },
-    {
-        timestamp: "2015-03-25T15:00:00.000Z",
-        temperature: 19.6239569219906
-    },
-    {
-        timestamp: "2015-03-25T16:00:00.000Z",
-        temperature: 21.4284862546897
-    },
-    {
-        timestamp: "2015-03-25T17:00:00.000Z",
-        temperature: 22.5971622932944
-    },
-    {
-        timestamp: "2015-03-25T18:00:00.000Z",
-        temperature: 24.4516364021043
-    },
-    {
-        timestamp: "2015-03-25T19:00:00.000Z",
-        temperature: 26.314179825294
-    },
-    {
-        timestamp: "2015-03-25T20:00:00.000Z",
-        temperature: 27.2966725797272
-    },
-    {
-        timestamp: "2015-03-25T21:00:00.000Z",
-        temperature: 27.8594008881709
-    },
-    {
-        timestamp: "2015-03-25T22:00:00.000Z",
-        temperature: 26.98771523591
-    },
-    {
-        timestamp: "2015-03-25T23:00:00.000Z",
-        temperature: 26.1419652896808
-    },
-    {
-        timestamp: "2015-03-26T00:00:00.000Z",
-        temperature: 24.2967135065912
-    },
-    {
-        timestamp: "2015-03-26T01:00:00.000Z",
-        temperature: 21.2627783997077
-    },
-    {
-        timestamp: "2015-03-26T02:00:00.000Z",
-        temperature: 19.6223366524463
-    },
-    {
-        timestamp: "2015-03-26T03:00:00.000Z",
-        temperature: 18.9702936572059
-    },
-    {
-        timestamp: "2015-03-26T04:00:00.000Z",
-        temperature: 18.64173108115
-    },
-    {
-        timestamp: "2015-03-26T05:00:00.000Z",
-        temperature: 18.5430028446263
-    },
-    {
-        timestamp: "2015-03-26T06:00:00.000Z",
-        temperature: 18.2597209484404
-    },
-    {
-        timestamp: "2015-03-26T07:00:00.000Z",
-        temperature: 17.8251835175158
-    },
-    {
-        timestamp: "2015-03-26T08:00:00.000Z",
-        temperature: 17.4726877440558
-    },
-    {
-        timestamp: "2015-03-26T09:00:00.000Z",
-        temperature: 17.651946077925
-    },
-    {
-        timestamp: "2015-03-26T10:00:00.000Z",
-        temperature: 17.7491791888976
-    },
-    {
-        timestamp: "2015-03-26T11:00:00.000Z",
-        temperature: 17.5917881825657
-    },
-    {
-        timestamp: "2015-03-26T12:00:00.000Z",
-        temperature: 17.5239416379086
-    },
-    {
-        timestamp: "2015-03-26T13:00:00.000Z",
-        temperature: 17.5307201091079
-    },
-    {
-        timestamp: "2015-03-26T14:00:00.000Z",
-        temperature: 18.2489964460844
-    },
-    {
-        timestamp: "2015-03-26T15:00:00.000Z",
-        temperature: 20.2797517883074
-    },
-    {
-        timestamp: "2015-03-26T16:00:00.000Z",
-        temperature: 21.888709612845
-    },
-    {
-        timestamp: "2015-03-26T17:00:00.000Z",
-        temperature: 23.8693783046019
-    },
-    {
-        timestamp: "2015-03-26T18:00:00.000Z",
-        temperature: 25.6434924437705
-    },
-    {
-        timestamp: "2015-03-26T19:00:00.000Z",
-        temperature: 27.3338701714523
-    },
-    {
-        timestamp: "2015-03-26T20:00:00.000Z",
-        temperature: 30.235307632747
-    },
-    {
-        timestamp: "2015-03-26T21:00:00.000Z",
-        temperature: 31.6784014189275
-    },
-    {
-        timestamp: "2015-03-26T22:00:00.000Z",
-        temperature: 32.4243323492878
-    },
-    {
-        timestamp: "2015-03-26T23:00:00.000Z",
-        temperature: 33.1688980688728
-    },
-    {
-        timestamp: "2015-03-27T00:00:00.000Z",
-        temperature: 30.8713221141196
-    },
-    {
-        timestamp: "2015-03-27T01:00:00.000Z",
-        temperature: 26.8944097638179
-    },
-    {
-        timestamp: "2015-03-27T02:00:00.000Z",
-        temperature: 24.6128150483182
-    },
-    {
-        timestamp: "2015-03-27T03:00:00.000Z",
-        temperature: 22.889746429207
-    },
-    {
-        timestamp: "2015-03-27T04:00:00.000Z",
-        temperature: 21.7148736202902
-    },
-    {
-        timestamp: "2015-03-27T05:00:00.000Z",
-        temperature: 20.8438711038614
-    },
-    {
-        timestamp: "2015-03-27T06:00:00.000Z",
-        temperature: 19.2559699722154
-    },
-    {
-        timestamp: "2015-03-27T07:00:00.000Z",
-        temperature: 18.337368653838
-    },
-    {
-        timestamp: "2015-03-27T08:00:00.000Z",
-        temperature: 17.6177708093268
-    },
-    {
-        timestamp: "2015-03-27T09:00:00.000Z",
-        temperature: 17.1977444392481
-    },
-    {
-        timestamp: "2015-03-27T10:00:00.000Z",
-        temperature: 16.7043132969425
-    },
-    {
-        timestamp: "2015-03-27T11:00:00.000Z",
-        temperature: 16.2471811295094
-    },
-    {
-        timestamp: "2015-03-27T12:00:00.000Z",
-        temperature: 16.087861898997
-    },
-    {
-        timestamp: "2015-03-27T13:00:00.000Z",
-        temperature: 15.6362635324538
-    },
-    {
-        timestamp: "2015-03-27T14:00:00.000Z",
-        temperature: 15.692528763157
-    },
-    {
-        timestamp: "2015-03-27T15:00:00.000Z",
-        temperature: 16.1186855064984
-    },
-    {
-        timestamp: "2015-03-27T16:00:00.000Z",
-        temperature: 17.3886258325874
-    },
-    {
-        timestamp: "2015-03-27T17:00:00.000Z",
-        temperature: 18.2540910121364
-    },
-    {
-        timestamp: "2015-03-27T18:00:00.000Z",
-        temperature: 19.5148327389508
-    },
-    {
-        timestamp: "2015-03-27T19:00:00.000Z",
-        temperature: 20.6023266315466
-    },
-    {
-        timestamp: "2015-03-27T20:00:00.000Z",
-        temperature: 21.3854066767194
-    },
-    {
-        timestamp: "2015-03-27T21:00:00.000Z",
-        temperature: 21.9084983994613
-    }
+const temperatures = [
+    23.951662561576,
+    23.072888829168,
+    22.270819047631,
+    21.339437342380,
+    20.101074304932,
+    18.415071755147,
+    17.748381758390,
+    17.658972674986,
+    17.092233480496,
+    17.902262647407,
+    17.913431501928,
+    17.962341591739,
+    18.629904994776,
+    18.724646111523,
+    18.345203212139,
+    17.950940514815,
+    17.645936738425,
+    18.002610819605,
+    18.641394482143,
+    19.367143150999,
+    20.808201208346,
+    22.523857666382,
+    24.421405146370,
+    26.204969371695,
+    26.57980248489,
+    26.552509444227,
+    23.975872499025,
+    20.770533400758,
+    19.582636156326,
+    18.726539994661,
+    18.288602913264,
+    17.490477141158,
+    17.183143095403,
+    17.289885665644,
+    17.857810036002,
+    18.199219222097,
+    18.1342090595,
+    18.588814968494,
+    18.673300302698,
+    19.160083319003,
+    19.20709579701,
+    18.984708224123,
+    19.429380206490,
+    20.849312470040,
+    21.589814518404,
+    22.339718246729,
+    22.789185887634,
+    23.341262856414,
+    23.492642005758,
+    23.096228324086,
+    22.266750291822,
+    21.026614255727,
+    20.009334985760,
+    18.985141473238,
+    18.524561500421,
+    18.29069425473,
+    18.059550866664,
+    18.473278995103,
+    18.725848153249,
+    18.559512864197,
+    18.17967403784,
+    17.768129939241,
+    17.44302132105,
+    17.345120517549,
+    17.437470113372,
+    17.892919163129,
+    18.912203998475,
+    19.616196998446,
+    20.729986815600,
+    21.768913071955,
+    22.553389835501,
+    22.837266829663,
+    23.201477380032,
+    22.568206288298,
+    22.320567551379,
+    20.866111860503,
+    18.536018351235,
+    17.515672445180,
+    17.206689748367,
+    17.197460459962,
+    17.337783593401,
+    17.2866229575,
+    17.429110492426,
+    17.422879301265,
+    17.420956116627,
+    17.14175782970,
+    17.304858458979,
+    17.33748279478,
+    17.701650934115,
+    17.563752890534,
+    18.827616338849,
+    19.440464869953,
+    20.564604967080,
+    21.952550788411,
+    21.904022184619,
+    22.819754161628,
+    22.239083191304,
+    22.468824490696,
+    21.946182879173,
+    21.321888308453,
+    19.968873841509,
+    18.940903103304,
+    18.182993146735,
+    17.607113268600,
+    17.415571247222,
+    17.811223881325,
+    18.011837145417,
+    17.992511074097,
+    17.914610746086,
+    17.635429765173,
+    17.299095939265,
+    16.894253414448,
+    17.021591125278,
+    17.537054720002,
+    19.623956921990,
+    21.428486254689,
+    22.597162293294,
+    24.451636402104,
+    26.31417982529,
+    27.296672579727,
+    27.859400888170,
+    26.9877152359,
+    26.141965289680,
+    24.296713506591,
+    21.262778399707,
+    19.622336652446,
+    18.970293657205,
+    18.6417310811,
+    18.543002844626,
+    18.259720948440,
+    17.825183517515,
+    17.472687744055,
+    17.65194607792,
+    17.749179188897,
+    17.591788182565,
+    17.523941637908,
+    17.530720109107,
+    18.248996446084,
+    20.279751788307,
+    21.88870961284,
+    23.869378304601,
+    25.643492443770,
+    27.333870171452,
+    30.23530763274,
+    31.678401418927,
+    32.424332349287,
+    33.168898068872,
+    30.871322114119,
+    26.894409763817,
+    24.612815048318,
+    22.88974642920,
+    21.714873620290,
+    20.843871103861,
+    19.255969972215,
+    18.33736865383,
+    17.617770809326,
+    17.1977444392481,
+    16.7043132969425,
+    16.2471811295094,
+    16.087861898997,
+    15.6362635324538,
+    15.692528763157,
+    16.1186855064984,
+    17.3886258325874,
+    18.2540910121364,
+    19.5148327389508,
+    20.6023266315466,
+    21.3854066767194,
+    21.9084983994613
 ]   

@@ -135,9 +135,6 @@ const AreaRoutes = () => {
                 path={`${path}/simple`}
                 component={Area.Simple} />
             <Route
-                path={`${path}/realtime`}
-                component={Area.Realtime} />
-            <Route
                 path={`${path}/stacked`}
                 component={Area.Stacked} />
             <Route
@@ -204,9 +201,6 @@ const PieRoutes = () => {
             <Route
                 path={`${path}/donut`}
                 component={Pie.Donut} />
-            <Route
-                path={`${path}/image`}
-                component={Pie.Image} />
             <Route
                 path={`${path}/pattern`}
                 component={Pie.Pattern} />

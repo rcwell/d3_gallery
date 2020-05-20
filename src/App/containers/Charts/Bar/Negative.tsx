@@ -12,6 +12,7 @@ import {
     scaleThreshold,
 } from 'd3';
 import { randomNum } from 'App/utils';
+import { ColumnBar } from 'App/components/Charts';
 
 interface Margin {
     top: number;
@@ -31,6 +32,17 @@ const width = 800;
 export const Negative = ({ location: { pathname } }: any) => {
     const svgRef = React.useRef<SVGSVGElement>(null);
     const [data, setData] = React.useState<Array<Sales>>(Array);
+    const [data2, setData2] = React.useState<Array<any>>([]);
+
+    React.useEffect(() => {
+        setData2(Array(2).fill(0).map((_, i) => ({
+            name: `Dataset_${i + 1}`,
+            data: months.map((month,j) => ({
+                x: month,
+                y: j === 7 ? 0 : randomNum(-50, 50)
+            }))
+        })))
+    }, []);
 
     React.useEffect(() => {
         const sales = months.map((month, i) => ({
@@ -113,14 +125,42 @@ export const Negative = ({ location: { pathname } }: any) => {
                 displayname: "Negative"
             }]}
             description={"Lorem ipsum dolor sith amet"}>
-            <svg width={800} height={500} ref={svgRef}>
-                <g className={"barGroup"} />
-                <g className={"axisGroup"}>
-                    <g className={"x-axis"} />
-                    <g className={"y-axis"} />
-                </g>
-                <g className={"titleGroup"} />
-            </svg>
+            <ColumnBar
+                midAligned
+                margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
+                height={500}
+                width={800}
+                series={data2}
+                title={{
+                    text: 'Sales',
+                    align: 'middle',
+                    location: 'top'
+                }}
+                yaxis={{
+                    title: {
+                        text: "Quantity",
+                        align: 'middle'
+                    },
+                    // min: -50,
+                    // max: 80
+                }}
+                xaxis={{
+                    categories: months,
+                    title: {
+                        text: 'Months',
+                        align: 'middle'
+                    }
+                }}
+                legend={{
+                    location: 'left',
+                    align: 'start',
+                }}
+                colorsScheme={[
+                    "#6494ED",
+                    "#ffcf00",
+                    "#FFA15C",
+                    "#FFC65C",
+                ]} />
         </RouteWrapper>
     )
 }
