@@ -18,7 +18,10 @@ const stateCtx = React.createContext<RootState>(rootState);
 const { Provider } = stateCtx;
 
 const StateProvider = ({ children }: any) => {
-	const [state, baseDispatch] = React.useReducer(uiReducer, { scrollPosition: 0 })
+	const [state, baseDispatch] = React.useReducer(uiReducer, {
+		scrollPosition: 0,
+		navigationLinks: [{ displayName: 'Home', link: "/" }]
+	});
 
 	const dispatch = React.useMemo(() =>
 		applyMiddleware(
@@ -29,11 +32,15 @@ const StateProvider = ({ children }: any) => {
 	const setScrollPosition = (position: number) => {
 		dispatch(UiActions.setScrollPosition(position))
 	}
+	const setNavigationLinks = (links: Array<string>) => {
+		dispatch(UiActions.setNavigationPage(links))
+	}
 
 	return (
 		<Provider value={{
 			...state,
-			setScrollPosition
+			setScrollPosition,
+			setNavigationLinks
 		}}>
 			{children}
 		</Provider>
