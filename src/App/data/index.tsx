@@ -303,13 +303,6 @@ const PieCharts: Array<RouteCardProps> = [
         }
     },
     {
-        title: 'Image',
-        description: 'Lorem ipsum dolor sith amet',
-        d:{
-            path:'pie/image'
-        }
-    },
-    {
         title: 'Donut',
         description: 'Lorem ipsum dolor sith amet',
         d:{
