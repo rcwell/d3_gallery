@@ -1,0 +1,22 @@
+{
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		// additionals
+		"**/node_modules": true,
+		"**/.babelrc": true,
+		"**/.editorconfig": true,
+		"**/.env": true,
+		"**/.gitignore": true,
+		"**/defs.d.ts": true,
+		"**/package-lock.json": true,
+		"**/readme.md": true,
+		"**/tsconfig.json": true,
+		"**/config-overrides.js": true,
+		"**/yarn.lock": true,
+		"**/.vscode": true,
+	}
+}
