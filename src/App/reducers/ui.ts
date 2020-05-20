@@ -8,11 +8,6 @@ export const uiReducer = (state: any, action: any) => {
                 ...state,
                 scrollPosition: payload
             };
-        case Ui.SET_NAVIGATION_PAGE:
-            return {
-                ...state,
-                navigationLinks: payload
-            };
         default:
             return state;
     }

@@ -1,7 +1,6 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import {
     select,
     scaleLinear,
@@ -29,7 +28,7 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 const margin: Margin = { top: 60, right: 20, bottom: 60, left: 100 };
 const height = 500;
 const width = 800;
-export const Negative = ({ location: { pathname } }: any) => {
+export const Negative = () => {
     const svgRef = React.useRef<SVGSVGElement>(null);
     const [data, setData] = React.useState<Array<Sales>>(Array);
     const [data2, setData2] = React.useState<Array<any>>([]);
@@ -37,7 +36,7 @@ export const Negative = ({ location: { pathname } }: any) => {
     React.useEffect(() => {
         setData2(Array(2).fill(0).map((_, i) => ({
             name: `Dataset_${i + 1}`,
-            data: months.map((month,j) => ({
+            data: months.map((month, j) => ({
                 x: month,
                 y: j === 7 ? 0 : randomNum(-50, 50)
             }))
@@ -120,10 +119,6 @@ export const Negative = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Negative Bar Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "Negative"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <ColumnBar
                 midAligned

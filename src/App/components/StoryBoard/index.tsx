@@ -23,7 +23,7 @@ const StoryBoard = () => {
 
 export default StoryBoard;
 
-const lines = () => {
+export const lines = () => {
     return (
         <>
             <StoryBlock>

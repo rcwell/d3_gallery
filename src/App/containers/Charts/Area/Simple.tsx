@@ -1,12 +1,11 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { randomNum } from 'App/utils';
 import { AreaChart } from 'App/components/Charts';
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septment", "October", "November", "December"];
 
-export const Simple = ({ location: { pathname } }: any) => {
+export const Simple = () => {
     const [data, setData] = React.useState<Array<any>>([]);
 
     React.useEffect(() => {
@@ -22,10 +21,6 @@ export const Simple = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Simple Area Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "simple"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <AreaChart
                 margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
@@ -49,8 +44,8 @@ export const Simple = ({ location: { pathname } }: any) => {
                         text: "Quantity",
                         align: 'middle'
                     },
-                    min:40,
-                    max:80
+                    min: 40,
+                    max: 80
                 }}
                 legend={{
                     location: 'left',

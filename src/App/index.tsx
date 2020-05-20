@@ -1,111 +1,54 @@
 import React from 'react';
 import styled from 'styled-components';
 import { black, blue, lightBlue, red, orange, green } from 'App/components/Colors';
-import transitionHOC, { TransitionTypes } from 'App/components/transitionHOC';
+import { FaExpandAlt, FaCompressAlt, AiFillGithub } from 'App/components/Icons';
 import { Title, Description } from 'App/components/Styled';
-import { FaExpandAlt, FaCompressAlt } from 'react-icons/fa';
-import { AiFillGithub } from 'react-icons/ai';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    withRouter
-} from "react-router-dom";
+import Containers from 'App/containers';
 
-const CustomVisualizations = React.lazy(() => import('App/containers/CustomVisualizations'));
-const Basics = React.lazy(() => import('App/containers/Basics'));
-const Charts = React.lazy(() => import('App/containers/Charts'));
-const Home = React.lazy(() => import('App/containers/Home'));
-// const Geo = React.lazy(() => import('App/containers/Geo'));
-
-// Lazy Load with 3 sec delay
-const Geo = React.lazy(() => new Promise(resolve => {
-    setTimeout(() => resolve(import("App/containers/Geo") as any), 3000);
-}));
+const baseUrl = "http://localhost:3000";
 
 const App = () => {
     const [isExpanded, setExpanded] = React.useState(Boolean);
     const [currentLocation, setLocation] = React.useState(String);
 
-    React.useEffect(() => {
-        const baseUrl = "http://localhost:3000";
-        const curLocation = window.location.href.replace(baseUrl, '');
-        setLocation(curLocation);
-        setExpanded(curLocation !== '/');
-    }, []);
-
-    const handleOnRouteChange = (location: string) => {
+    const handleOnRouteChange = React.useCallback((location: string) => {
         if (currentLocation === location) return;
-        if (location.split('/').length > 2) return;
         setExpanded(location !== '/');
         setLocation(location);
-    };
+    }, [currentLocation]);
+
+    React.useEffect(() => {
+        const currentUrl = window.location.href.replace(baseUrl, '');
+        handleOnRouteChange(currentUrl)
+    }, [handleOnRouteChange]);
 
     return (
-        <AppWrapper>
-            <Header theme={{ expanded: isExpanded }}>
+        <AppWrapper isExpanded={isExpanded}>
+            <header>
                 <Title>D3 Component Gallery</Title>
                 <Description>
                     A gallery showcasing components built with D3 and React+Typescript from basics usage up.
                 </Description>
-                <IconLink href={"https://github.com/rcwell/d3_gallery"} target={"_blank"}>
+                <a href={"https://github.com/rcwell/d3_gallery"} target={"_blank"} rel="noopener noreferrer">
                     <AiFillGithub />
-                </IconLink>
-            </Header>
-            <ViewPort theme={{ expanded: isExpanded }}>
-                <ViewTopBar>
+                </a>
+            </header>
+            <section>
+                <section>
                     <div></div>
                     <div></div>
                     <div onClick={() => setExpanded(!isExpanded)}>
                         {isExpanded ? <FaCompressAlt /> : <FaExpandAlt />}
                     </div>
-                </ViewTopBar>
-                <ViewportBody>
-                    <Router>
-                        <Routes onRouteChange={handleOnRouteChange} />
-                    </Router>
-                </ViewportBody>
-            </ViewPort>
+                </section>
+                <Containers onRouteChange={handleOnRouteChange} />
+            </section>
         </AppWrapper>
     );
 };
 
-export default App;
 
-const Routes = withRouter(({ location, onRouteChange }: any) => {
-    const { pathname } = location;
-
-    React.useEffect(() => {
-        if (pathname.split('/').length > 2) return;
-        onRouteChange(pathname);
-    }, [pathname, onRouteChange]);
-
-    return transitionHOC(
-        pathname.split('/').filter((x: string) => x !== '')[0] || "Home",
-        TransitionTypes.Fade)(
-            <React.Suspense fallback={"Loading..."}>
-                <Switch location={location}>
-                    <Route path="/basics">
-                        <Basics />
-                    </Route>
-                    <Route path="/charts">
-                        <Charts />
-                    </Route>
-                    <Route path="/geo">
-                        <Geo />
-                    </Route>
-                    <Route path="/customvisualizations">
-                        <CustomVisualizations />
-                    </Route>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                </Switch>
-            </React.Suspense>
-        )
-});
-
-const AppWrapper = styled.section`
+const AppWrapper = styled.section<{ isExpanded: boolean }>`
     justify-content: center;
     background: #ffffff;
     display: flex;
@@ -114,120 +57,110 @@ const AppWrapper = styled.section`
     width: 100vw;
     flex-direction: column;
     position:relative;
-`;
-const ViewTopBar = styled.div`
-    height: 30px;
-    width: 100%;
-    background: #fff;
-    padding: 0 10px;
-    border-bottom: 1px solid #eee;
-    display: grid;
-    grid-template-columns: 15px 15px 15px auto;
-    align-items: center;
-    
-    :hover div{
-        height:13px;
-        width:13px;
-        svg{
-            opacity: 1;
-        }
-    }
-        
-    div{
-        height:10px;
-        width:10px;
-        border-radius:50%;
-        position: relative;
-        transition: all .3s ease-in-out;
-    }
-    div:nth-child(1){
-        background:${red};
-    }
-    div:nth-child(2){
-        background:${orange};
-    }
-    div:nth-child(3){
-        background:${green};
-        cursor:pointer;
 
-        :hover{
-            height:15px;
-            width:15px;
-        }
-    }
-    div svg{
-        opacity: 0;
-        fill:#fff;
-        height: calc(100% - 4px);
-        width: calc(100% - 4px);
-        top:2px;
-        left:2px;
+    > header {
+        display: flex;
+        pointer-events: ${({ isExpanded }) => isExpanded ? "none" : "all"};
         position: absolute;
-        transition: all .3s ease-in-out;
-    }
-`;
-const ViewPort = styled.div`
-    z-index: 1;
-    box-shadow: -2px 10px 50px -13px rgba(0,0,0,.15);
-    border: 1px solid #eee;
-    background: linear-gradient(180deg,#f7f7f7 0,#fff 19%,#fff);
-    display: flex;
-    flex-direction: column;
-    height:100%;
-    width:100%;
-    max-height: ${props => props.theme.expanded ? "100%" : "500px"};
-    max-width: ${props => props.theme.expanded ? "100%" : "700px"};
-    margin: 0 auto;
-    transform: ${props => props.theme.expanded ? "" : "translateY(25%)"};
-    transition: all .5s ease-in-out;
-`;
-ViewPort.defaultProps = {
-    theme: {
-        expanded: false
-    }
-};
-const Header = styled.header`
-    display: flex;
-    pointer-events: ${props => props.theme.expanded ? "none" : "all"};
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50vh;
-    flex-direction: column;
-    background: ${lightBlue};
-    align-items: center;
-    justify-content:center;
-    opacity: ${props => props.theme.expanded ? 0 : 1};
-    color: ${blue};
-    text-align: center;
-    transition: opacity .3s ease-in-out;
-
-    ${Title}{
-        margin-bottom: .8em;
-    }
-
-    ${Description}{
-        max-width: 400px;
-        margin-bottom: .8em;
-    }
-`;
-Header.defaultProps = {
-    theme: {
-        expanded: false
-    }
-};
-const IconLink = styled.a`
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: ${black};
-    font-size: 2.5rem;
-
-    :hover {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50vh;
+        flex-direction: column;
+        background: ${lightBlue};
+        align-items: center;
+        justify-content:center;
+        opacity: ${({ isExpanded }) => isExpanded ? 0 : 1};
         color: ${blue};
+        text-align: center;
+        transition: opacity .3s ease-in-out;
+
+        > *:not(a){
+            max-width: 400px;
+            margin-bottom: .8em;
+        }
+
+        > a {
+            font-weight: 600;
+            color: ${black};
+            font-size: 2.5rem;
+            &:hover {
+                color: ${blue};
+            }
+        }
+    }
+
+    > section {
+        z-index: 1;
+        box-shadow: -2px 10px 50px -13px rgba(0,0,0,.15);
+        border: 1px solid #eee;
+        background: linear-gradient(180deg,#f7f7f7 0,#fff 19%,#fff);
+        display: flex;
+        flex-direction: column;
+        height:100%;
+        width:100%;
+        max-height: ${({ isExpanded }) => isExpanded ? "100%" : "500px"};
+        max-width: ${({ isExpanded }) => isExpanded ? "100%" : "700px"};
+        margin: 0 auto;
+        transform: ${({ isExpanded }) => isExpanded ? "" : "translateY(25%)"};
+        transition: all .5s ease-in-out;
+        > section{
+            width: 100%;
+
+            &:first-child{
+                height: 30px;
+                background: #fff;
+                padding: 0 10px;
+                border-bottom: 1px solid #eee;
+                display: grid;
+                grid-template-columns: 15px 15px 15px auto;
+                align-items: center;
+                &:hover div{
+                    height:13px;
+                    width:13px;
+                    svg{
+                        opacity: 1;
+                    }
+                }
+                > div{
+                    height:10px;
+                    width:10px;
+                    border-radius:50%;
+                    position: relative;
+                    transition: all .3s ease-in-out;
+                }
+                > div:nth-child(1){
+                    background:${red};
+                }
+                > div:nth-child(2){
+                    background:${orange};
+                }
+                > div:nth-child(3){
+                    background:${green};
+                    cursor:pointer;
+    
+                    :hover{
+                        height:15px;
+                        width:15px;
+                    }
+                }
+                > div > svg{
+                    opacity: 0;
+                    fill:#fff;
+                    height: calc(100% - 4px);
+                    width: calc(100% - 4px);
+                    top:2px;
+                    left:2px;
+                    position: absolute;
+                    transition: all .3s ease-in-out;
+                }
+            }
+            &:last-child{
+                height:100%;
+                position:relative;
+            }
+        }
     }
 `;
-const ViewportBody = styled.section`
-    height:100%;
-    width:100%;
-`;
+
+export default App;

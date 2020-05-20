@@ -14,7 +14,7 @@ import * as Scatter from './Scatter';
 
 export const MainRoute = {
     path: `/charts`,
-    displayname: "charts"
+    displayName: "charts"
 };
 
 const Charts = () => {
@@ -103,7 +103,6 @@ const Charts = () => {
 
 export default Charts;
 
-
 const LineRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -123,10 +122,13 @@ const LineRoutes = () => {
             <Route
                 path={`${path}/multiple-datasets`}
                 component={Line.MultipleDatasets} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Line.Simple} />
         </Switch>
     )
 }
-
 const AreaRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -143,11 +145,13 @@ const AreaRoutes = () => {
             <Route
                 path={`${path}/multiple-datasets`}
                 component={Area.MultipleDatasets} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Area.Simple} />
         </Switch>
     )
 }
-
-
 const BarRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -170,10 +174,13 @@ const BarRoutes = () => {
             <Route
                 path={`${path}/stacked`}
                 component={Bar.Stacked} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Bar.Simple} />
         </Switch>
     )
 }
-
 const HeatmapRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -187,10 +194,13 @@ const HeatmapRoutes = () => {
             <Route
                 path={`${path}/color-range`}
                 component={Heatmap.ColorRange} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Heatmap.Simple} />
         </Switch>
     )
 }
-
 const PieRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -204,10 +214,13 @@ const PieRoutes = () => {
             <Route
                 path={`${path}/pattern`}
                 component={Pie.Pattern} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Pie.Simple} />
         </Switch>
     )
 }
-
 const RadarRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -218,10 +231,13 @@ const RadarRoutes = () => {
             <Route
                 path={`${path}/color-fill`}
                 component={Radar.ColorFill} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Radar.Simple} />
         </Switch>
     )
 }
-
 const ScatterRoutes = () => {
     const { path } = useRouteMatch();
     return (
@@ -235,6 +251,10 @@ const ScatterRoutes = () => {
             <Route
                 path={`${path}/bubble`}
                 component={Scatter.Bubble} />
+            <Route
+                exact
+                path={`${path}`}
+                component={Scatter.Simple} />
         </Switch>
     )
 }

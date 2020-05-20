@@ -37,9 +37,12 @@ const Transition = styled.div`
     bottom: 5px;
 
     > section{
-        padding:0 20px;
-        display: flex;
-        flex-direction: column;
+
+        &:last-child{
+            padding:0 20px;
+            display: flex;
+            flex-direction: column;
+        }
     }
 `;
 

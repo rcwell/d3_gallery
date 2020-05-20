@@ -1,7 +1,7 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import { Dropdown } from 'App/components/Dropdown'
 import styled from 'styled-components';
 import { data as carData } from './data';
@@ -19,7 +19,7 @@ interface Car {
     name: string;
 }
 
-export const Simple = ({ location: { pathname } }: any) => {
+export const Simple = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
     const [y, setY] = React.useState({
         key: 'weight',
@@ -42,10 +42,6 @@ export const Simple = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Simple Scatter Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "simple"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <Container>
                 <AxesSelector>

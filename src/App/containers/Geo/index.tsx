@@ -10,7 +10,7 @@ import { GeoMaps } from 'App/data';
 
 export const MainRoute = {
     path: `/geo`,
-    displayname: "geo"
+    displayName: "geo"
 };
 
 const Geo = () => {

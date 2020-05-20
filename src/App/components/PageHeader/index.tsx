@@ -1,11 +1,9 @@
 import React from 'react';
-import BreadCrumbs from 'App/components/Breadcrumbs';
-import { Header, Title, Description } from 'App/components/Styled';
-import { Code } from 'App/components/Typography';
+import { Header } from 'App/components/Styled';
+import { Code, H1, Caption } from 'App/components/Typography';
 import { PageHeaderProps } from 'App/interface';
 
-const PageHeader = ({ title, description, route }: PageHeaderProps) => {
-
+const PageHeader = ({ title, description }: PageHeaderProps) => {
     const renderDescription = () => {
         const strArr: Array<string> = description.split(" ");
         const contents: Array<any> = [];
@@ -25,11 +23,10 @@ const PageHeader = ({ title, description, route }: PageHeaderProps) => {
 
     return (
         <Header>
-            <BreadCrumbs links={route} />
-            <Title>{title}</Title>
-            <Description>
+            <H1>{title}</H1>
+            <Caption>
                 {renderDescription()}
-            </Description>
+            </Caption>
         </Header>
     )
 }

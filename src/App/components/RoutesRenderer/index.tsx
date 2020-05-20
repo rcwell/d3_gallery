@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 interface RouteProp {
     path: string;
-    component: ({ location: { pathname } }: any) => JSX.Element;
+    component: () => JSX.Element;
 }
 interface RoutesRendererProps {
     routes: Array<RouteProp>;

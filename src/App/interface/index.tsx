@@ -18,7 +18,6 @@ export interface CardProps {
 export interface PageHeaderProps {
     title: string,
     description: string;
-    route: Array<CrumbLink>;
 }
 
 export interface BreadcrumbProps {
@@ -26,7 +25,7 @@ export interface BreadcrumbProps {
 }
 
 export interface CrumbLink {
-    displayname: string;
+    displayName: string;
     path: string;
 }
 

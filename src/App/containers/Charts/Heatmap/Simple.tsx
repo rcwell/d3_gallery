@@ -1,14 +1,13 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { HeatMap } from 'App/components/Charts/HeatMap';
 import { randomNum } from 'App/utils';
 
 const weeks = ['Week-1', 'Week-2', 'Week-3', 'Week-4', 'Week-5', 'Week-6', 'Week-7', 'Week-8'];
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-export const Simple = ({ location: { pathname } }: any) => {
+export const Simple = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
 
     React.useEffect(() => {
@@ -20,10 +19,7 @@ export const Simple = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Simple Heatmap Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "simple"
-            }]}
+
             description={"Lorem ipsum dolor sith amet"}>
             <HeatMap
                 width={(weeks.length * 50) + 30 + 50}

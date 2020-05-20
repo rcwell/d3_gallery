@@ -6,7 +6,7 @@ import { CardProps } from 'App/interface';
 
 export const MainRoute = {
     path: `/custom-visualizations`,
-    displayname: "Custom Visualizations"
+    displayName: "Custom Visualizations"
 };
 
 const CustomVisualizations = () => {

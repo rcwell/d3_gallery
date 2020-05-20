@@ -1,13 +1,12 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { Bar } from 'App/components/Charts';
 import { randomNum } from 'App/utils';
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septment", "October", "November", "December"];
 
-export const MultipleDatasets = ({ location: { pathname } }: any) => {
+export const MultipleDatasets = () => {
     const [data, setData] = React.useState<Array<any>>([]);
 
     React.useEffect(() => {
@@ -23,10 +22,6 @@ export const MultipleDatasets = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Multiple Datasets Bar Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "multipleDatasets"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <Bar
                 margin={{ top: 60, right: 20, bottom: 60, left: 230 }}

@@ -1,8 +1,9 @@
 import { Selection, select } from 'd3';
-const uuid = require('uuid');
+import { v4 as uuid } from 'uuid';
 
 export const randomNum = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
-export const randomString = (len: number) => uuid.v4().replace("-", '').slice(0, len);
+
+export const randomString = (len: number) => uuid().replace("-", '').slice(0, len);
 
 export const getEnumKeys = <T extends object>(e: T): string[] =>
     Object.values(e)

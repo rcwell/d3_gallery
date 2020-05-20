@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { darkGray, lightGray, blue } from 'App/components/Colors';
 import { Link, LinkProps } from 'react-router-dom';
 
@@ -40,18 +40,18 @@ export const H5 = styled.h4`
     font-size: 1rem;
     margin-bottom: 0.35em;
 `;
-export const Caption: StyledComponent<"span", any, TypographyProps, never> = styled.span`
+export const Caption = styled.span<TypographyProps>`
     margin-top: 0;
     font-size:  ${({ size }: TypographyProps) => FontSizesEnum[size || "m"]}rem;
     margin-bottom: 0.35em;
 `;
-export const P: StyledComponent<"p", any, TypographyProps, never> = styled.p`
+export const P= styled.p<TypographyProps>`
     margin-top: 0;
     font-size:  ${({ size }: TypographyProps) => FontSizesEnum[size || "m"]}rem;
     margin: 1em 0;
 `;
 
-const AnchorWrap = styled.label`
+const AnchorWrap = styled.label<TypographyProps>`
     display: unset;
     font-size: .9rem;
     padding: .05rem 0;
@@ -65,7 +65,6 @@ export const Anchor = ({ to, children }: LinkProps) => (
         <Link to={to}>{children}</Link>
     </AnchorWrap>
 )
-
 
 export const Code = styled.code`
     font-size: .9rem;

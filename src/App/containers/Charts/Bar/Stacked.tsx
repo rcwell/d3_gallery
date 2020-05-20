@@ -1,12 +1,11 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { randomNum } from 'App/utils';
 import { ColumnBar } from 'App/components/Charts';
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septment", "October", "November", "December"];
-export const Stacked = ({ location: { pathname } }: any) => {
+export const Stacked = () => {
     const [data, setData] = React.useState<Array<any>>([]);
 
     React.useEffect(() => {
@@ -22,10 +21,6 @@ export const Stacked = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Stacked Bar Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "stacked"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <ColumnBar
                 margin={{ top: 60, right: 20, bottom: 60, left: 180 }}

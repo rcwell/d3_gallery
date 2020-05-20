@@ -1,16 +1,11 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { RadialBar } from 'App/components/Charts';
 
-export const Radial = ({ location: { pathname } }: any) => {
+export const Radial = () => {
     return (
         <RouteWrapper
             title={"Radial Bar Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "Radial"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <RadialBar
                 width={800}

@@ -1,6 +1,6 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import { Dropdown } from 'App/components/Dropdown'
 import styled from 'styled-components';
 import { data as carData } from './data';
@@ -29,7 +29,7 @@ interface Car {
     name: string;
 }
 
-export const Icons = ({ location: { pathname } }: any) => {
+export const Icons = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
     const [y, setY] = React.useState({
         key: 'weight',
@@ -46,17 +46,13 @@ export const Icons = ({ location: { pathname } }: any) => {
         setData(carData.slice(0, 50).map((car, i) => ({
             x: car[x.key as keyof Car],
             y: car[y.key as keyof Car],
-            imageKey: i >= 30  ? 'fb' : 'instagram'
+            imageKey: i >= 30 ? 'fb' : 'instagram'
         })));
     }, [x, y]);
 
     return (
         <RouteWrapper
             title={"Icon Scatter Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "Icon"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <Container>
                 <AxesSelector>

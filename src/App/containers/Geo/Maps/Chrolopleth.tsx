@@ -1,22 +1,14 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 
-export const Chrolopleth = ({ location: { pathname } }: any) => {
-    const routes = [
-        MainRoute,
-        {
-            path: pathname,
-            displayname: "Chrolopleth"
-        },
-    ];
 
+export const Chrolopleth = () => {
+    
     return (
         <RouteWrapper
             title={"Chrolopleth"}
-            route={routes}
-            description={"Lorem ipsum dolor sith amet"}>
+                        description={"Lorem ipsum dolor sith amet"}>
             Chrolopleth
         </RouteWrapper>
     )

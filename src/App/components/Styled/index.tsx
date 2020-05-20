@@ -16,7 +16,7 @@ const Header = styled.header`
     flex-direction: column;
     align-items: flext-start;
     justify-content: center;
-    padding:50px 0;
+    padding:100px 0 50px;
 `;
 const Title = styled.h1`
     font-size: 2rem;
@@ -34,6 +34,7 @@ const StoryBlock = styled.section`
 `;
 
 const Description = styled.label``;
+
 
 export {
     ScrollableSection,

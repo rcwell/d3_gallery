@@ -1,6 +1,6 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import { Dropdown } from 'App/components/Dropdown'
 import styled from 'styled-components';
 import { data as carData } from './data';
@@ -18,7 +18,7 @@ interface Car {
     name: string;
 }
 
-export const Bubble = ({ location: { pathname } }: any) => {
+export const Bubble = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
     const [y, setY] = React.useState({
         key: 'weight',
@@ -41,10 +41,6 @@ export const Bubble = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Bubble Scatter Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "bubble"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <Container>
                 <AxesSelector>

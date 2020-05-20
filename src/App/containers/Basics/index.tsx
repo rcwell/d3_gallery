@@ -9,9 +9,9 @@ import RouteWrapper from 'App/components/RouteWrapper';
 import Section from "App/components/Section";
 import { CardProps } from 'App/interface';
 
-export const MainRoute = {
+const MainRoute = {
     path: `/basics`,
-    displayname: "basics"
+    displayName: "basics"
 };
 
 const Basics = () => {

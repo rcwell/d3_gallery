@@ -1,13 +1,13 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import { Pie } from 'App/components/Charts';
 import { randomNum } from 'App/utils';
 
 const months = ["Jan", "Feb", "Mar", "Apr"];
 
-export const Donut = ({ location: { pathname } }: any) => {
+export const Donut = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
 
     React.useEffect(() => {
@@ -20,10 +20,7 @@ export const Donut = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Donut Pie Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "Donut"
-            }]}
+            
             description={"Lorem ipsum dolor sith amet"}>
             <Pie
                 donut
@@ -36,11 +33,11 @@ export const Donut = ({ location: { pathname } }: any) => {
 
 // import React from 'react';
 // import RouteWrapper from 'App/components/RouteWrapper';
-// import { MainRoute } from '../index';
+// 
 // import * as d3 from 'd3';
 // import styled from 'styled-components';
 
-// export const Donut = ({ location: { pathname } }: any) => {
+// export const Donut = () => {
 //     const svgRef = React.useRef<SVGSVGElement>(null);
 
 
@@ -165,10 +162,7 @@ export const Donut = ({ location: { pathname } }: any) => {
 //     return (
 //         <RouteWrapper
 //             title={"Donut Pie Chart"}
-//             route={[MainRoute, {
-//                 path: pathname,
-//                 displayname: "Donut"
-//             }]}
+//             
 //             description={"Lorem ipsum dolor sith amet"}>
 //             <Wrapper>
 //                 <svg width={800} height={500} ref={svgRef} >

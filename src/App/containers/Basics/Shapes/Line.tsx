@@ -1,23 +1,14 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { H3, P, Code, CodeBlock, Anchor } from 'App/components/Typography';
 import { StoryBlock } from 'App/components/Styled';
 import StoryNavigation from 'App/components/StoryNavigation';
 
 export const Line = ({ location: { pathname } }: any) => {
-    const routes = [
-        MainRoute,
-        {
-            path: pathname,
-            displayname: "line"
-        },
-    ];
 
     return (
         <RouteWrapper
             title={"Line"}
-            route={routes}
             description={"Lorem ipsum dolor sith amet"}>
             <Story />
             <StoryNavigation
@@ -55,7 +46,7 @@ const Story = () => {
                 <Svg><line /></Svg>
                 <P>At this point, we still won't be able to see our line but trust me it's there. In order for our line to be seen, we need to add our line's start and end points coordinates and also the stroke properties</P>
                 <P>To do this, we use <Code>x1 & y2</Code> for start point coordiate, and <Code>x2 & y2</Code>. To add stroke properties, we use <Code>stroke</Code> for color and <Code>stroke-width</Code> for the thickess of our line</P>
-                <Svg><line x1="20" y1="20" x2="180" y2="130" stroke="black" stoke-width="2"/></Svg>
+                <Svg><line x1="20" y1="20" x2="180" y2="130" stroke="black" stoke-width="2" /></Svg>
                 <P>There we go</P>
             </StoryBlock>
 

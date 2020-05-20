@@ -1,45 +1,54 @@
 import React from 'react';
-import { TiChartArea } from 'react-icons/ti';
-import { FaGlobeAmericas, FaMagic } from 'react-icons/fa';
-import { Link, LinkProps } from 'react-router-dom';
 import styled from 'styled-components';
-import { D3 } from 'App/components/Icons';
+import { Link } from 'react-router-dom';
 import { blue, lightBlue } from 'App/components/Colors';
+import { D3, FaGlobeAmericas, FaMagic, TiChartArea } from 'App/components/Icons';
 
-const Home = () => {
-    return (
-        <CategoryCardContainer>
-            <LinkCard to="/basics">
-                {<D3 />}
-                <div>Basics</div>
-            </LinkCard>
-            <LinkCard to="/charts">
-                {<TiChartArea />}
-                <div>Charts</div>
-            </LinkCard>
-            <LinkCard to="/geo">
-                {<FaGlobeAmericas />}
-                <div>Geo</div>
-            </LinkCard>
-            <LinkCard to="/customvisualizations">
-                {<FaMagic />}
-                <div>Custom Visualizations</div>
-            </LinkCard>
-        </CategoryCardContainer >
-    );
-};
+const Home = () => (
+    <CategoryCardContainer>
+        {links.map(link => (
+            <Link key={link.to} to={link.to}>
+                {<link.icon />}
+                <div>{link.displayName}</div>
+            </Link>
+        ))}
+    </CategoryCardContainer >
+)
 
-export default Home;
+const links = [
+    {
+        to: '/basics',
+        displayName: 'Basics',
+        icon: D3
+    },
+    {
+        to: '/charts',
+        displayName: 'Charts',
+        icon: TiChartArea
+    },
+    {
+        to: '/geo',
+        displayName: 'Geo',
+        icon: FaGlobeAmericas
+    },
+    {
+        to: '/customvisualizations',
+        displayName: 'Custom Visualizations',
+        icon: FaMagic
+    }
+];
 
-const LinkCard = ({ children, ...p }: LinkProps) => {
-    return (
-        <CategoryCard>
-            <Link {...p}>{children}</Link>
-        </CategoryCard>
-    );
-}
-const CategoryCard = styled.div`
-    a{
+const CategoryCardContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    height:100%;
+    width:100%;
+    padding:20px;
+
+    > a{
         background:${lightBlue};
         border:1px solid ${blue};
         width: 100%;
@@ -57,28 +66,19 @@ const CategoryCard = styled.div`
         :hover{    
             box-shadow: 0 6px 11px -7px #4063a2;
         }
-    }
 
-    a svg{
-        height:50px;
-        width:50px;
-    }
-
-    a div{
-        position: absolute;
-        bottom: 20px;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: 15px;
+        svg{
+            height:50px;
+            width:50px;
+        }
+        div{
+            position: absolute;
+            bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 15px;
+        }
     }
 `;
-const CategoryCardContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-    justify-content: center;
-    height:100%;
-    width:100%;
-    padding:20px;
-`;
+
+export default Home;

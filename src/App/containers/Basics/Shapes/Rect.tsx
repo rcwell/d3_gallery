@@ -1,24 +1,15 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { H3, P, Code, CodeBlock } from 'App/components/Typography';
 import { StoryBlock } from 'App/components/Styled';
 import StoryNavigation from 'App/components/StoryNavigation';
 
 export const Rect = ({ location: { pathname } }: any) => {
-    const routes = [
-        MainRoute,
-        {
-            path: pathname,
-            displayname: "rect"
-        },
-    ];
 
     return (
         <RouteWrapper
             title={"Rect"}
-            route={routes}
             description={'In this section, we will go over the <rect> shape and how to create it using D3.js.'}>
             <Story />
             <StoryNavigation
@@ -39,7 +30,7 @@ const Story = () => {
         <div style={{
             display: 'flex',
             flexDirection: 'column',
-            maxWidth:800
+            maxWidth: 800
         }}>
             <StoryBlock>
                 <H3>Setting up SVG container</H3>
@@ -48,16 +39,16 @@ const Story = () => {
                 <P>Assuming our SVG container already exist in DOM else create our container with <Code>d3.append</Code></P>
                 <CodeBlock maxWidth={600}>{sourceCodes[1]}</CodeBlock>
                 <P>I added a styling to see our SVG container.</P>
-                <Svg/>
+                <Svg />
             </StoryBlock>
 
             <StoryBlock>
                 <H3>Draw the Rectangle</H3>
                 <P>We then draw our rectangle by appending a <Code>rect</Code> element on our SVG container using <Code>svg.append</Code></P>
                 <CodeBlock maxWidth={600}>{sourceCodes[2]}</CodeBlock>
-                <Svg><rect/></Svg>
+                <Svg><rect /></Svg>
                 <P>At this point, we still won't be able to see our rectangle but trust me it's there. In order for our rectangle to be seen, we need to style it. So let's add width & height to our rectangle.</P>
-                <Svg><rect width="180" height="100"/></Svg>
+                <Svg><rect width="180" height="100" /></Svg>
                 <P>Using the Rectangle with created, we can change its color, size, and position with <Code>fill</Code>,<Code>height & width</Code>, and <Code>x & y</Code>. </P>
                 <CodeBlock maxWidth={600}>{sourceCodes[3]}</CodeBlock>
             </StoryBlock>
@@ -66,7 +57,7 @@ const Story = () => {
                 <P>Now our code would look like this</P>
                 <CodeBlock maxWidth={600}>{sourceCodes[4]} </CodeBlock>
                 <P>And our Rectangle would look like this</P>
-                <Svg><rect width="180" height="100" fill="cornflowerblue" x="10" y="25"/></Svg>
+                <Svg><rect width="180" height="100" fill="cornflowerblue" x="10" y="25" /></Svg>
             </StoryBlock>
         </div>
     )

@@ -9,6 +9,10 @@ import { ReactComponent as SingleAxes } from 'App/components/Icons/singleAxes.sv
 import { ReactComponent as XYAxes } from 'App/components/Icons/xYAxes.svg';
 import { ReactComponent as FormattedAxis } from 'App/components/Icons/formattedAxis.svg';
 import { ReactComponent as D3 } from 'App/components/Icons/d3.svg';
+import { FaExpandAlt, FaCompressAlt, FaGlobeAmericas, FaMagic } from 'react-icons/fa';
+import { AiFillGithub, AiFillHome } from 'react-icons/ai';
+import { GoChevronRight } from 'react-icons/go';
+import { TiChartArea } from 'react-icons/ti';
 
 export {
     Rect,
@@ -21,5 +25,13 @@ export {
     SingleAxes,
     XYAxes,
     FormattedAxis,
-    D3
+    D3,
+    FaExpandAlt,
+    FaCompressAlt,
+    AiFillGithub,
+    FaGlobeAmericas,
+    FaMagic,
+    TiChartArea,
+    AiFillHome,
+    GoChevronRight
 }

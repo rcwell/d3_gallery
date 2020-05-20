@@ -1,11 +1,11 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import * as d3 from 'd3';
 import styled from 'styled-components';
 
-export const Pattern = ({ location: { pathname } }: any) => {
+export const Pattern = () => {
     const svgRef = React.useRef<SVGSVGElement>(null);
 
 
@@ -120,10 +120,7 @@ export const Pattern = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Patter Fill Pie Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "patter"
-            }]}
+
             description={"Lorem ipsum dolor sith amet"}>
             <Wrapper>
                 <svg width={800} height={500} ref={svgRef} >

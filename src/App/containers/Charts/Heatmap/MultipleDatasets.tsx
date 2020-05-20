@@ -1,13 +1,13 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import { HeatMap } from 'App/components/Charts/HeatMap';
 import { randomNum } from 'App/utils';
 
 const weeks = ['Week-1', 'Week-2', 'Week-3', 'Week-4', 'Week-5', 'Week-6', 'Week-7', 'Week-8'];
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-export const MultipleDatasets = ({ location: { pathname } }: any) => {
+export const MultipleDatasets = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
 
     React.useEffect(() => {
@@ -19,10 +19,7 @@ export const MultipleDatasets = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Multiple Datasets Heatmap Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "Multiple-Datasets"
-            }]}
+            
             description={"Lorem ipsum dolor sith amet"}>
             <HeatMap
                 width={(weeks.length * 50) + 30 + 50}
@@ -52,7 +49,7 @@ export const MultipleDatasets = ({ location: { pathname } }: any) => {
 
 // import React from 'react';
 // import RouteWrapper from 'App/components/RouteWrapper';
-// import { MainRoute } from '../index';
+// 
 // import styled from 'styled-components';
 // import * as d3 from 'd3';
 // import { getEnumKeyValues, randomNum, getEnumKeys } from 'App/utils';
@@ -86,7 +83,7 @@ export const MultipleDatasets = ({ location: { pathname } }: any) => {
 //     "18:00"
 // }
 
-// export const MultipleDatasets = ({ location: { pathname } }: any) => {
+// export const MultipleDatasets = () => {
 //     const svgRef = React.useRef<SVGSVGElement>(null);
 //     const [data, setData] = React.useState<Array<Sales>>([]);
 
@@ -200,10 +197,7 @@ export const MultipleDatasets = ({ location: { pathname } }: any) => {
 //     return (
 //         <RouteWrapper
 //             title={"Multiple Datasets Heatmap Chart"}
-//             route={[MainRoute, {
-//                 path: pathname,
-//                 displayname: "Multiple-Datasets"
-//             }]}
+//             
 //             description={"Lorem ipsum dolor sith amet"}>
 //             <Svg ref={svgRef}>
 //                 <g className={"heatMapGroup"} />

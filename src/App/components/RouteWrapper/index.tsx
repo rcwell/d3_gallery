@@ -4,7 +4,7 @@ import { ScrollableSection, Body } from 'App/components/Styled';
 import { stateCtx } from "App/store";
 import { useHistory } from 'react-router-dom';
 
-const RouteWrapper = ({ title, description, route, children }: any) => {
+const RouteWrapper = ({ title, description, children }: any) => {
     const scrollableRef = React.useRef<HTMLDivElement>(null);
     const globalState = React.useContext(stateCtx);
     const history = useHistory();
@@ -33,7 +33,7 @@ const RouteWrapper = ({ title, description, route, children }: any) => {
 
     return (
         <ScrollableSection ref={scrollableRef}>
-            <PageHeader title={title} description={description} route={route} />
+            <PageHeader title={title} description={description}/>
             <Body>
                 {children}
             </Body>

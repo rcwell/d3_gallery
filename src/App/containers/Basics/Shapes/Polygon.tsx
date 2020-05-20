@@ -1,21 +1,12 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 
-export const Polygon = ({ location: { pathname } }: any) => {
-    const routes = [
-        MainRoute,
-        {
-            path: pathname,
-            displayname: "polygon"
-        },
-    ];
-    
+export const Polygon = () => {
+
     return (
         <RouteWrapper
             title={"Polygon"}
-            route={routes}
             description={"Lorem ipsum dolor sith amet"}>
             Polygon
         </RouteWrapper>

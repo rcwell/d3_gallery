@@ -1,9 +1,8 @@
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
 import { AreaChart } from 'App/components/Charts';
 
-export const TimeSeries = ({ location: { pathname } }: any) => {
+export const TimeSeries = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
 
     React.useEffect(() => {
@@ -13,7 +12,7 @@ export const TimeSeries = ({ location: { pathname } }: any) => {
         const dateCount = 29;
 
         const __data = Array(seriesCount).fill(0).map((_, i) => ({
-            name: `Location__${i+1}`,
+            name: `Location__${i + 1}`,
             data: Array(dateCount).fill(0).map((_, j) => ({
                 x: new Date(new Date(baseDate).setDate(date + j)),
                 y: temperatures[(i * dateCount) + j]
@@ -25,10 +24,6 @@ export const TimeSeries = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Time Series Area Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "timeseries"
-            }]}
             description={"Lorem ipsum dolor sith amet"}>
             <AreaChart
                 margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
@@ -54,7 +49,7 @@ export const TimeSeries = ({ location: { pathname } }: any) => {
                     },
                 }}
                 stroke={{
-                    curve:'smooth'
+                    curve: 'smooth'
                 }}
                 legend={{
                     location: 'left',

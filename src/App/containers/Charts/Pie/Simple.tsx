@@ -1,13 +1,13 @@
 
 import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { MainRoute } from '../index';
+
 import { Pie } from 'App/components/Charts';
 import { randomNum } from 'App/utils';
 
 const months = ["January", "February", "March", "April"];
 
-export const Simple = ({ location: { pathname } }: any) => {
+export const Simple = () => {
     const [data, setData] = React.useState<Array<any>>(Array);
 
     React.useEffect(() => {
@@ -20,10 +20,7 @@ export const Simple = ({ location: { pathname } }: any) => {
     return (
         <RouteWrapper
             title={"Simple Pie Chart"}
-            route={[MainRoute, {
-                path: pathname,
-                displayname: "simple"
-            }]}
+            
             description={"Lorem ipsum dolor sith amet"}>
             <Pie
                 height={500}

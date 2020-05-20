@@ -6,12 +6,20 @@ import applyMiddleware from './applyMiddleware';
 
 interface RootState {
 	scrollPosition: number;
+	navigationLinks: Array<Link>;
 	setScrollPosition: (position: number) => void;
 }
+interface Link {
+	displayName: string,
+	link: string
+}
+
 const rootState: RootState = {
 	scrollPosition: 0,
-	setScrollPosition: (_: number) => { }
+	navigationLinks: [],
+	setScrollPosition: (_: number) => { },
 }
+
 
 const stateCtx = React.createContext<RootState>(rootState);
 
@@ -19,28 +27,24 @@ const { Provider } = stateCtx;
 
 const StateProvider = ({ children }: any) => {
 	const [state, baseDispatch] = React.useReducer(uiReducer, {
-		scrollPosition: 0,
-		navigationLinks: [{ displayName: 'Home', link: "/" }]
+		scrollPosition: 0
 	});
 
 	const dispatch = React.useMemo(() =>
 		applyMiddleware(
 			baseDispatch,
-			logger),
+			logger
+		),
 		[baseDispatch]);
 
 	const setScrollPosition = (position: number) => {
 		dispatch(UiActions.setScrollPosition(position))
 	}
-	const setNavigationLinks = (links: Array<string>) => {
-		dispatch(UiActions.setNavigationPage(links))
-	}
 
 	return (
 		<Provider value={{
 			...state,
-			setScrollPosition,
-			setNavigationLinks
+			setScrollPosition
 		}}>
 			{children}
 		</Provider>
