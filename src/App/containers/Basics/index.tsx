@@ -1,28 +1,22 @@
 import React from 'react';
-import { LinearScale, BandScale, PointScale, OrdinalScale, ThresholdScale } from './Scales';
-import { Rect, Circle, Ellipse, Polyline, Polygon, Line, Path } from './Shapes';
-import { BasicShapes, BasicAxis, BasicScales, CoordPlotting } from 'App/data';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
-import { SingleAxis, XYAxis, FormattedAxis } from './Axis';
-import { Coordinates, Plotting } from './CoordinatesPlotting';
 import RouteWrapper from 'App/components/RouteWrapper';
 import Section from "App/components/Section";
 import { CardProps } from 'App/interface';
-
-const MainRoute = {
-    path: `/basics`,
-    displayName: "basics"
-};
+import Routes from './Routes';
+import {
+    Rect, Circle, Ellipse, Line, Polygon, Polyline, Path, SingleAxes, XYAxes, FormattedAxis
+} from 'App/components/Icons';
 
 const Basics = () => {
     const { location, push } = useHistory();
     const { path, url } = useRouteMatch();
 
-    const handleOnCardClick = ({ d }: CardProps) => {
-        if (!d) return;
+    const handleOnCardClick = ({ path }: CardProps) => {
+        if (!path) return;
         push({
             ...location,
-            pathname: `${url}/${d.path}`,
+            pathname: `${url}/${path}`,
             state: { ...location.state, data: true }
         });
     };
@@ -30,91 +24,152 @@ const Basics = () => {
     return (
         <Switch>
             <Route
-                path={`${path}/shapes/rect`}
-                component={Rect} />
-            <Route
-                path={`${path}/shapes/circle`}
-                component={Circle} />
-            <Route
-                path={`${path}/shapes/ellipse`}
-                component={Ellipse} />
-            <Route
-                path={`${path}/shapes/line`}
-                component={Line} />
-            <Route
-                path={`${path}/shapes/polygon`}
-                component={Polygon} />
-            <Route
-                path={`${path}/shapes/polyline`}
-                component={Polyline} />
-            <Route
-                path={`${path}/shapes/path`}
-                component={Path} />
-
-            <Route
-                path={`${path}/axis/single-axis`}
-                component={SingleAxis} />
-            <Route
-                path={`${path}/axis/x-y-axis`}
-                component={XYAxis} />
-            <Route
-                path={`${path}/axis/formatted-axis`}
-                component={FormattedAxis} />
-
-            <Route
-                path={`${path}/scales/linear`}
-                component={LinearScale} />
-            <Route
-                path={`${path}/scales/band`}
-                component={BandScale} />
-            <Route
-                path={`${path}/scales/point`}
-                component={PointScale} />
-            <Route
-                path={`${path}/scales/ordinal`}
-                component={OrdinalScale} />
-            <Route
-                path={`${path}/scales/threshold`}
-                component={ThresholdScale} />
-
-            <Route
-                path={`${path}/coordinates-plotting/coordinates`}
-                component={Coordinates} />
-            <Route
-                path={`${path}/coordinates-plotting/plotting`}
-                component={Plotting} />
-
-            <Route
-                path={path}
+                exact path={path}
                 component={() => (
                     <RouteWrapper
                         title={"Basics"}
-                        description={"Lorem ipsum dolor sith amet"}
-                        route={[MainRoute]}>
+                        description={"Lorem ipsum dolor sith amet"}>
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Shapes"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={BasicShapes} />
+                            contents={routeData.shapes} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Axis"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={BasicAxis} />
+                            contents={routeData.axis} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Principal Scales"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={BasicScales} />
+                            contents={routeData.scales} />
                         <Section
                             onCardClick={handleOnCardClick}
-                            title={"Coordinates and Plotting"}
+                            title={"Plotting"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={CoordPlotting} />
+                            contents={routeData.plotting} />
                     </RouteWrapper>
                 )} />
+            <Route component={Routes} />
         </Switch>
     );
 };
 
 export default Basics;
+
+const routeData = {
+    shapes: [
+        {
+            title: 'Rect',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Rect />,
+            code: '<rect/>',
+            path: 'shapes/rect'
+        },
+        {
+            title: 'Circle',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Circle />,
+            code: '<circle/>',
+            path: 'shapes/circle'
+        },
+        {
+            title: 'Ellipse',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Ellipse />,
+            code: '<ellipse/>',
+            path: 'shapes/ellipse'
+        },
+        {
+            title: 'Line',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Line />,
+            code: '<line/>',
+            path: 'shapes/line'
+        },
+        {
+            title: 'Polygon',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Polygon />,
+            code: '<polygon/>',
+            path: 'shapes/polygon'
+        },
+        {
+            title: 'Polyline',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Polyline />,
+            code: '<polyline/>',
+            path: 'shapes/polyline'
+        },
+        {
+            title: 'Path',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <Path />,
+            code: '<path/>',
+            path: 'shapes/path'
+        }
+    ],
+    axis: [
+        {
+            title: 'Single Axis',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <SingleAxes />,
+            code: 'x-axis',
+            path: 'axis/single-axis'
+        },
+        {
+            title: 'X & Y Axis',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <XYAxes />,
+            code: 'x-y-axis',
+            path: 'axis/x-y-axis'
+        },
+        {
+            title: 'Formatted Axis',
+            description: 'Lorem ipsum dolor sith amet',
+            icon: <FormattedAxis />,
+            code: 'formatted-axis',
+            path: 'axis/formatted-axis'
+        }
+    ],
+    scales: [
+        {
+            title: 'Linear',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scales/linear'
+        },
+        {
+            title: 'Band',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scales/band'
+        },
+        {
+            title: 'Point',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scales/point'
+        },
+        {
+            title: 'Ordinal',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scales/ordinal'
+        },
+        {
+            title: 'Threshold',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scales/threshold'
+        }
+    ],
+    plotting: [
+        {
+            title: 'Coordinatates',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'plotting/coordinates'
+        },
+        {
+            title: 'Plotting',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'plotting/plot'
+        }
+    ]
+}

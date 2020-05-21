@@ -5,11 +5,11 @@ import RouteWrapper from 'App/components/RouteWrapper';
 import { CardProps } from 'App/interface';
 
 export const MainRoute = {
-    path: `/custom-visualizations`,
-    displayName: "Custom Visualizations"
+    path: `/custom`,
+    displayName: "Custom"
 };
 
-const CustomVisualizations = () => {
+const Custom= () => {
     const { location, push } = useHistory();
     const { path, url } = useRouteMatch();
 
@@ -42,4 +42,4 @@ const CustomVisualizations = () => {
     );
 };
 
-export default CustomVisualizations;
+export default Custom;

@@ -1,27 +1,25 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
 import { H3, P, Code, CodeBlock, Anchor } from 'App/components/Typography';
 import { StoryBlock } from 'App/components/Styled';
 import StoryNavigation from 'App/components/StoryNavigation';
+import { RouteChildrenProps } from 'react-router-dom';
 
-export const Circle = ({ location: { pathname } }: any) => {
+export const Circle = ({ location: { pathname } }: RouteChildrenProps) => {
 
     return (
-        <RouteWrapper
-            title={"Circle"}
-            description={"In this section, we will go over the <circle/> shape and how to create it using D3.js."}>
+        <>
             <Story />
             <StoryNavigation
                 prevLink={{
                     displayName: "Prev: Rect",
-                    path: pathname.replace('circle', 'rect')
+                    path: pathname.replace('/circle', '/rect')
                 }}
                 nextLink={{
                     displayName: "Next: Ellipse",
-                    path: pathname.replace('circle', 'ellipse')
+                    path: pathname.replace('/circle', '/ellipse')
                 }} />
-        </RouteWrapper>
+        </>
     )
 }
 

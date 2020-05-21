@@ -32,8 +32,8 @@ const links = [
         icon: FaGlobeAmericas
     },
     {
-        to: '/customvisualizations',
-        displayName: 'Custom Visualizations',
+        to: '/custom',
+        displayName: 'Custom',
         icon: FaMagic
     }
 ];

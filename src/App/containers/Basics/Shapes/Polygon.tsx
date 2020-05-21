@@ -1,14 +1,11 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
+import { RouteChildrenProps } from 'react-router-dom';
 
-export const Polygon = () => {
-
+export const Polygon = ({ location: { pathname } }: RouteChildrenProps) => {
     return (
-        <RouteWrapper
-            title={"Polygon"}
-            description={"Lorem ipsum dolor sith amet"}>
+        <div>
             Polygon
-        </RouteWrapper>
+        </div>
     )
 }

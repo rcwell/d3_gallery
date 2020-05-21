@@ -1,26 +1,24 @@
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
 import { H3, P, Code, CodeBlock, Anchor } from 'App/components/Typography';
 import { StoryBlock } from 'App/components/Styled';
 import StoryNavigation from 'App/components/StoryNavigation';
+import { RouteChildrenProps } from 'react-router-dom';
 
-export const Line = ({ location: { pathname } }: any) => {
+export const Line = ({ location: { pathname } }: RouteChildrenProps) => {
 
     return (
-        <RouteWrapper
-            title={"Line"}
-            description={"Lorem ipsum dolor sith amet"}>
+        <>
             <Story />
             <StoryNavigation
                 prevLink={{
                     displayName: "Prev: Ellipse",
-                    path: pathname.replace('line', 'ellipse')
+                    path: pathname.replace('/line', '/ellipse')
                 }}
                 nextLink={{
                     displayName: "Next: Polygon",
-                    path: pathname.replace('line', 'polygon')
+                    path: pathname.replace('/line', '/polygon')
                 }} />
-        </RouteWrapper>
+        </>
     )
 }
 

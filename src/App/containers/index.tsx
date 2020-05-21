@@ -18,7 +18,7 @@ const Home = lazyLoader('./Home',0);
 const Basics = lazyLoader('./Basics');
 const Charts = lazyLoader('./Charts');
 const Geo = lazyLoader('./Geo');
-const CustomVisualizations = lazyLoader('./CustomVisualizations');
+const Custom = lazyLoader('./Custom');
 
 const Containers = (props: IContainers) => {
     return (
@@ -66,8 +66,8 @@ const Routes = withRouter(({ location, onRouteChange }: any) => {
                     <Route path="/geo">
                         <Geo />
                     </Route>
-                    <Route path="/customvisualizations">
-                        <CustomVisualizations />
+                    <Route path="/custom">
+                        <Custom />
                     </Route>
                     <Route exact path="/">
                         <Home />

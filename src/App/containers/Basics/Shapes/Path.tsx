@@ -1,14 +1,11 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
+import { RouteChildrenProps } from 'react-router-dom';
 
-export const Path = () => {
-
+export const Path = ({ location: { pathname } }: RouteChildrenProps) => {
     return (
-        <RouteWrapper
-            title={"Path"}
-            description={"Lorem ipsum dolor sith amet"}>
+        <div>
             Path
-        </RouteWrapper>
+        </div>
     )
 }
