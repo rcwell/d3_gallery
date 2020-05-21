@@ -43,14 +43,14 @@ export default Scales;
 
 const routeCards: Array<CardProps> = [
     {
-        title: 'Band Scale',
-        description: 'Lorem ipsum dolor sith amet',
-        path: 'band-scale',
-    },
-    {
         title: 'Linear Scale',
         description: 'Lorem ipsum dolor sith amet',
         path: 'linear-scale',
+    },
+    {
+        title: 'Band Scale',
+        description: 'Lorem ipsum dolor sith amet',
+        path: 'band-scale',
     },
     {
         title: 'Ordinal Scale',
@@ -68,10 +68,3 @@ const routeCards: Array<CardProps> = [
         path: 'threshold-scale',
     }
 ];
-
-// remove later
-export * from './Band';
-export * from './Linear';
-export * from './Ordinal';
-export * from './Point';
-export * from './Threshold';

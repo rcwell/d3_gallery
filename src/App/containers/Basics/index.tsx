@@ -137,27 +137,27 @@ const routeData = {
         {
             title: 'Linear',
             description: 'Lorem ipsum dolor sith amet',
-            path: 'scales/linear'
+            path: 'scales/linear-scale'
         },
         {
             title: 'Band',
             description: 'Lorem ipsum dolor sith amet',
-            path: 'scales/band'
+            path: 'scales/band-scale'
         },
         {
             title: 'Point',
             description: 'Lorem ipsum dolor sith amet',
-            path: 'scales/point'
+            path: 'scales/point-scale'
         },
         {
             title: 'Ordinal',
             description: 'Lorem ipsum dolor sith amet',
-            path: 'scales/ordinal'
+            path: 'scales/ordinal-scale'
         },
         {
             title: 'Threshold',
             description: 'Lorem ipsum dolor sith amet',
-            path: 'scales/threshold'
+            path: 'scales/threshold-scale'
         }
     ],
     plotting: [

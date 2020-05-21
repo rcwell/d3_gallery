@@ -15,8 +15,8 @@ export const Ellipse = ({ location: { pathname } }: RouteChildrenProps) => {
                     path: pathname.replace('/ellipse', '/circle')
                 }}
                 nextLink={{
-                    displayName: "Next: Line",
-                    path: pathname.replace('/ellipse', '/line')
+                    displayName: "Next: Path",
+                    path: pathname.replace('/ellipse', '/path')
                 }} />
         </>
     )

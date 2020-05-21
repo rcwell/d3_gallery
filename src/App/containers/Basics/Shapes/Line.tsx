@@ -11,8 +11,8 @@ export const Line = ({ location: { pathname } }: RouteChildrenProps) => {
             <Story />
             <StoryNavigation
                 prevLink={{
-                    displayName: "Prev: Ellipse",
-                    path: pathname.replace('/line', '/ellipse')
+                    displayName: "Prev: Path",
+                    path: pathname.replace('/line', '/path')
                 }}
                 nextLink={{
                     displayName: "Next: Polygon",
