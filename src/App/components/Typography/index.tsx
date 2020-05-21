@@ -92,8 +92,8 @@ export const Pre = styled.pre`
     }
 `;
 
-export const CodeBlock = ({ children, maxWidth, maxHeight }: any) => (
-    <Pre style={{ maxWidth, maxHeight, marginLeft: '1rem' }}>
+export const CodeBlock = ({ children, maxWidth, maxHeight, margin }: any) => (
+    <Pre style={{ maxWidth, maxHeight, marginLeft: '1rem', margin }}>
         <Code>{children}</Code>
     </Pre>
 );

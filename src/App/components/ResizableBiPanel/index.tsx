@@ -4,7 +4,9 @@ import Draggable from 'react-draggable';
 
 interface IResizableBiPanel {
     minPanelWidth?: number;
-    children:[
+    verticalCenter?: boolean;
+    horizontalCenter?: boolean;
+    children: [
         JSX.Element,
         JSX.Element
     ];
@@ -14,7 +16,7 @@ interface IResizableBiPanel {
 
 // }
 
-const ResizableBiPanel = ({ minPanelWidth, children }: IResizableBiPanel) => {
+const ResizableBiPanel = ({ minPanelWidth, children, verticalCenter, horizontalCenter }: IResizableBiPanel) => {
     const containerRef = React.useRef<HTMLElement>(null);
     const leftPnlRef = React.useRef<HTMLElement>(null);
     const rightPnlRef = React.useRef<HTMLElement>(null);
@@ -42,7 +44,7 @@ const ResizableBiPanel = ({ minPanelWidth, children }: IResizableBiPanel) => {
     };
 
     return (
-        <Container ref={containerRef} >
+        <Container ref={containerRef} verticalCenter={verticalCenter} horizontalCenter={horizontalCenter}>
             <LeftPanel ref={leftPnlRef}>
                 {children[0]}
             </LeftPanel>
@@ -72,7 +74,7 @@ const RightPanel = styled.section`
     display:inline-block;
 `;
 
-const Container = styled.section`
+const Container = styled.section<{ verticalCenter?: boolean, horizontalCenter?: boolean }>`
     width:100%;
     height:100%;
     position: relative;
@@ -81,6 +83,13 @@ const Container = styled.section`
     border:1px solid #eee;
     border-radius: 3px;
     margin-bottom:20px;
+
+    > section {
+        display:flex;
+        align-items: ${(({ verticalCenter }) => verticalCenter ? "center" : "unset")};
+        justify-content: ${(({ horizontalCenter }) => horizontalCenter ? "center" : "unset")};
+    }
+
 
     ${LeftPanel}{
         border-right:1px solid #eee;
