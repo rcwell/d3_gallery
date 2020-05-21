@@ -13,78 +13,58 @@ import {
 } from 'App/components/Icons';
 import { CardProps } from 'App/interface';
 
-interface RouteCardProps extends CardProps{
-    d: {
-        path:string;
-    }
-}
-
-const BasicShapes: Array<RouteCardProps> = [
+const BasicShapes: Array<CardProps> = [
     {
         title: 'Rect',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Rect />,
         code: '<rect/>',
-        d:{
-            path:'shapes/rect'
-        }
+        path:'shapes/rect'
     },
     {
         title: 'Circle',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Circle />,
         code: '<circle/>',
-        d:{
-            path:'shapes/circle'
-        }
+        path:'shapes/circle'
     },
     {
         title: 'Ellipse',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Ellipse />,
         code: '<ellipse/>',
-        d:{
-            path:'shapes/ellipse'
-        }
+        path:'shapes/ellipse'
     },
     {
         title: 'Line',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Line />,
         code: '<line/>',
-        d:{
-            path:'shapes/line'
-        }
+        path:'shapes/line'
     },
     {
         title: 'Polygon',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Polygon />,
         code: '<polygon/>',
-        d:{
-            path:'shapes/polygon'
-        }
+        path:'shapes/polygon'
     },
     {
         title: 'Polyline',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Polyline />,
         code: '<polyline/>',
-        d:{
-            path:'shapes/polyline'
-        }
+        path:'shapes/polyline'
     },
     {
         title: 'Path',
         description: 'Lorem ipsum dolor sith amet',
         icon: <Path />,
         code: '<path/>',
-        d:{
-            path:'shapes/path'
-        }
+        path:'shapes/path'
     }
 ];
-const BasicAxis: Array<RouteCardProps> = [
+const BasicAxis: Array<CardProps> = [
     {
         title: 'Single Axis',
         description: 'Lorem ipsum dolor sith amet',
@@ -113,7 +93,7 @@ const BasicAxis: Array<RouteCardProps> = [
         }
     }
 ];
-const BasicScales: Array<RouteCardProps> = [
+const BasicScales: Array<CardProps> = [
     {
         title: 'Linear',
         description: 'Lorem ipsum dolor sith amet',
@@ -150,7 +130,7 @@ const BasicScales: Array<RouteCardProps> = [
         }
     }
 ]
-const CoordPlotting: Array<RouteCardProps> = [
+const CoordPlotting: Array<CardProps> = [
     {
         title: 'Coordinatates',
         description: 'Lorem ipsum dolor sith amet',
@@ -167,7 +147,7 @@ const CoordPlotting: Array<RouteCardProps> = [
     }
 ]
 
-const LineCharts: Array<RouteCardProps> = [
+const LineCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -197,7 +177,7 @@ const LineCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const AreaCharts: Array<RouteCardProps> = [
+const AreaCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -220,7 +200,7 @@ const AreaCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const BarCharts: Array<RouteCardProps> = [
+const BarCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -264,7 +244,7 @@ const BarCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const ScatterCharts: Array<RouteCardProps> = [
+const ScatterCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -287,7 +267,7 @@ const ScatterCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const PieCharts: Array<RouteCardProps> = [
+const PieCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -310,7 +290,7 @@ const PieCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const RadarCharts: Array<RouteCardProps> = [
+const RadarCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -326,7 +306,7 @@ const RadarCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const HeatmapCharts: Array<RouteCardProps> = [
+const HeatmapCharts: Array<CardProps> = [
     {
         title: 'Simple',
         description: 'Lorem ipsum dolor sith amet',
@@ -349,7 +329,7 @@ const HeatmapCharts: Array<RouteCardProps> = [
         }
     }
 ];
-const GeoMaps: Array<RouteCardProps> = [
+const GeoMaps: Array<CardProps> = [
     {
         title: 'Simple World Map',
         description: 'Lorem ipsum dolor sith amet',

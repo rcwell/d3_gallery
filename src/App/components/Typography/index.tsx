@@ -7,7 +7,8 @@ type FontSizesType = "xs" | "s" | "m" | "l" | "xl";
 enum FontSizesEnum {
     "xs" = .6,
     "s" = .8,
-    "m" = 1,
+    "m" = .95,
+    "r" = 1,
     "l" = 1.2,
     "xl" = 1.4
 }

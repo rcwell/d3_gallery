@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { black, blue, lightBlue, red, orange, green } from 'App/components/Colors';
 import { FaExpandAlt, FaCompressAlt, AiFillGithub } from 'App/components/Icons';
-import { Title, Description } from 'App/components/Styled';
+import { H1, Caption } from 'App/components/Typography';
 import Containers from 'App/containers';
 
 const baseUrl = "http://localhost:3000";
@@ -25,10 +25,10 @@ const App = () => {
     return (
         <AppWrapper isExpanded={isExpanded}>
             <header>
-                <Title>D3 Component Gallery</Title>
-                <Description>
+                <H1>D3 Component Gallery</H1>
+                <Caption>
                     A gallery showcasing components built with D3 and React+Typescript from basics usage up.
-                </Description>
+                </Caption>
                 <a href={"https://github.com/rcwell/d3_gallery"} target={"_blank"} rel="noopener noreferrer">
                     <AiFillGithub />
                 </a>

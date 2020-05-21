@@ -4,15 +4,14 @@ import { D3 } from 'App/components/Icons';
 import { SectionProps, CardProps } from 'App/interface';
 import { Title, Description } from 'App/components/Styled';
 import { blue, gray } from 'App/components/Colors';
+import { H3, Caption } from 'App/components/Typography';
 
 const Section = ({ title, description, contents, onCardClick }: SectionProps) => {
     return (
         <SectionWrapper>
-            <Title>{title}</Title>
-            <Description>
-                {description}
-            </Description>
-            <CardsWrapper>
+            {title && <H3>{title}</H3>}
+            {description && <Caption size={'m'}>{description}</Caption>}
+            <CardsWrapper hasTitle={title !== undefined}>
                 {contents.map((x, i) => (
                     <SectionCard
                         onClick={() => onCardClick ? onCardClick(x) : null}
@@ -51,8 +50,8 @@ const SectionWrapper = styled.section`
     }
 `;
 
-const CardsWrapper = styled.div`
-    margin-top:20px;
+const CardsWrapper = styled.div<{hasTitle:boolean}>`
+    margin-top: ${({ hasTitle }) => hasTitle ? "20px" : "0"};
     display:grid;
     gap:20px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr) );

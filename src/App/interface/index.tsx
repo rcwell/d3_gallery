@@ -1,8 +1,8 @@
 export interface SectionProps {
-    title: string;
-    description: string;
     contents: Array<CardProps>;
     onCardClick?: (data: any) => void;
+    title?: string;
+    description?: string;
 }
 
 export interface CardProps {
@@ -12,7 +12,7 @@ export interface CardProps {
     icon?: JSX.Element;
     id?: string;
     code?: string;
-    d?: any
+    [key: string]: any;
 }
 
 export interface PageHeaderProps {
