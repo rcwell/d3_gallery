@@ -2,10 +2,10 @@ import React from 'react';
 import RouteWrapper from 'App/components/RouteWrapper';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import { getLastOfArray, capitalizeString } from 'App/utils';
-import Shapes from '../Shapes';
-import Axis from '../Axis';
-import Scales from '../Scales';
-import Plotting from '../Plotting';
+import Shapes from './Shapes';
+import Axis from './Axis';
+import Scales from './Scales';
+import Plotting from './Plotting';
 
 const Routes = () => {
     const { location } = useHistory();
@@ -19,7 +19,7 @@ const Routes = () => {
     React.useEffect(() => {
         setPage({
             description: "Lorem ipsum dolor sith amet",
-            title: capitalizeString(getLastOfArray(location.pathname.split('/')))
+            title: getLastOfArray(location.pathname.split('/')).split('-').map(capitalizeString).join(" ")
         });
     }, [location.pathname])
 

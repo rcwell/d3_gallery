@@ -1,6 +1,4 @@
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
-
 import { randomNum } from 'App/utils';
 import { LineChart } from 'App/components/Charts';
 
@@ -20,48 +18,44 @@ export const StepLine = () => {
     }, [])
 
     return (
-        <RouteWrapper
-            title={"Step Line Chart"}
-            description={"Lorem ipsum dolor sith amet"}>
-            <LineChart
-                margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
-                height={500}
-                width={800}
-                series={data}
-                stroke={{
-                    curve: 'step'
-                }}
-                title={{
-                    text: 'Sales',
-                    align: 'middle',
-                    location: 'top'
-                }}
-                xaxis={{
-                    title: {
-                        text: 'Months',
-                        align: 'middle'
-                    },
-                    categories: months
-                }}
-                yaxis={{
-                    title: {
-                        text: "Quantity",
-                        align: 'middle'
-                    },
-                    max: 100,
-                    startFromZero: true
-                }}
-                legend={{
-                    location: 'left',
-                    align: 'start',
-                }}
-                colorsScheme={[
-                    "#6494ED",
-                    "#ffcf00",
-                    "#FFA15C",
-                    "#FFC65C",
-                ]}
-            />
-        </RouteWrapper>
+        <LineChart
+            margin={{ top: 60, right: 20, bottom: 60, left: 180 }}
+            height={500}
+            width={800}
+            series={data}
+            stroke={{
+                curve: 'step'
+            }}
+            title={{
+                text: 'Sales',
+                align: 'middle',
+                location: 'top'
+            }}
+            xaxis={{
+                title: {
+                    text: 'Months',
+                    align: 'middle'
+                },
+                categories: months
+            }}
+            yaxis={{
+                title: {
+                    text: "Quantity",
+                    align: 'middle'
+                },
+                max: 100,
+                startFromZero: true
+            }}
+            legend={{
+                location: 'left',
+                align: 'start',
+            }}
+            colorsScheme={[
+                "#6494ED",
+                "#ffcf00",
+                "#FFA15C",
+                "#FFC65C",
+            ]}
+        />
     )
 }

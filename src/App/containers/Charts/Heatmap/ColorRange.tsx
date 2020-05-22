@@ -1,6 +1,5 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
 import { HeatMap } from 'App/components/Charts/HeatMap';
 import { randomNum } from 'App/utils';
 
@@ -17,35 +16,31 @@ export const ColorRange = () => {
     }, []);
 
     return (
-        <RouteWrapper
-            title={"Color Range Heatmap Chart"}
-            description={"Lorem ipsum dolor sith amet"}>
-            <HeatMap
-                width={(weeks.length * 50) + 30 + 50}
-                height={(days.length * 50) + 20}
-                margin={{ top: 0, right: 50, bottom: 20, left: 30 }}
-                series={data}
-                colorScale={{
-                    startColor: '#ffffff',
-                    endColor: '#83c581',
-                    range: {
-                        min: 0,
-                        max: 4
-                    }
-                }}
-                thresholdScale={{
-                    range: [25, 50, 75, 100],
-                    colors: ['#f46b6b', '#ffb359', '#fff184', '#95d18d']
-                }}
-                xaxis={{
-                    title: { text: "Weeks", align: "middle" },
-                    categories: weeks
-                }}
-                yaxis={{
-                    title: { text: "Days", align: "middle" },
-                    categories: days
-                }}
-            />
-        </RouteWrapper>
+        <HeatMap
+            width={(weeks.length * 50) + 30 + 50}
+            height={(days.length * 50) + 20}
+            margin={{ top: 0, right: 50, bottom: 20, left: 30 }}
+            series={data}
+            colorScale={{
+                startColor: '#ffffff',
+                endColor: '#83c581',
+                range: {
+                    min: 0,
+                    max: 4
+                }
+            }}
+            thresholdScale={{
+                range: [25, 50, 75, 100],
+                colors: ['#f46b6b', '#ffb359', '#fff184', '#95d18d']
+            }}
+            xaxis={{
+                title: { text: "Weeks", align: "middle" },
+                categories: weeks
+            }}
+            yaxis={{
+                title: { text: "Days", align: "middle" },
+                categories: days
+            }}
+        />
     )
 }

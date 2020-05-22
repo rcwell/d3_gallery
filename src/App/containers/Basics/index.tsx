@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import RouteWrapper from 'App/components/RouteWrapper';
 import Section from "App/components/Section";
 import { CardProps } from 'App/interface';
-import Routes from './Routes';
+import Routes from './routes';
 import {
     Rect, Circle, Ellipse, Line, Polygon, Polyline, Path, SingleAxes, XYAxes, FormattedAxis
 } from 'App/components/Icons';

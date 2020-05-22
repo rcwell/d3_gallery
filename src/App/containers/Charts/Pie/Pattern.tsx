@@ -1,7 +1,5 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
-
 import * as d3 from 'd3';
 import styled from 'styled-components';
 
@@ -118,38 +116,33 @@ export const Pattern = () => {
     }, [svgRef]);
 
     return (
-        <RouteWrapper
-            title={"Patter Fill Pie Chart"}
-
-            description={"Lorem ipsum dolor sith amet"}>
-            <Wrapper>
-                <svg width={800} height={500} ref={svgRef} >
-                    <defs>
-                        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
-                            <feOffset in="blur" dx="1" dy="1" />
-                        </filter>
-                        <pattern id="checkers_odd" fill="rgb(252, 141, 98)" x="0" y="0" width="50" height="50" viewBox="0 0 20 20" patternUnits="userSpaceOnUse">
-                            <rect x="0" width="10" height="10" y="0"></rect>
-                            <rect x="10" width="10" height="10" y="10"></rect>
-                        </pattern>
-                        <mask maskUnits="userSpaceOnUse" id="fade">
-                            <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
-                                <stop offset="0" stopColor="#FFFFFF"></stop>
-                                <stop offset="1" stopColor="#000000"></stop>
-                            </linearGradient>
-                            <rect fill="url(#gradient)" width="100%" height="100%"></rect>
-                        </mask>
-                        <pattern id="checkers_even" fill="rgb(102, 194, 165)" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <circle mask="url(#fade)" cx="20" cy="20" r="20"></circle>
-                        </pattern>
-                    </defs>
-                    <PieGroup className={"pieGroup"} />
-                    <AnnotationGroup className={"annotationGroup"} />
-                </svg>
-                <Tooltip className={'tooltip'} />
-            </Wrapper>
-        </RouteWrapper >
+        <Wrapper>
+            <svg width={800} height={500} ref={svgRef} >
+                <defs>
+                    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+                        <feOffset in="blur" dx="1" dy="1" />
+                    </filter>
+                    <pattern id="checkers_odd" fill="rgb(252, 141, 98)" x="0" y="0" width="50" height="50" viewBox="0 0 20 20" patternUnits="userSpaceOnUse">
+                        <rect x="0" width="10" height="10" y="0"></rect>
+                        <rect x="10" width="10" height="10" y="10"></rect>
+                    </pattern>
+                    <mask maskUnits="userSpaceOnUse" id="fade">
+                        <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
+                            <stop offset="0" stopColor="#FFFFFF"></stop>
+                            <stop offset="1" stopColor="#000000"></stop>
+                        </linearGradient>
+                        <rect fill="url(#gradient)" width="100%" height="100%"></rect>
+                    </mask>
+                    <pattern id="checkers_even" fill="rgb(102, 194, 165)" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle mask="url(#fade)" cx="20" cy="20" r="20"></circle>
+                    </pattern>
+                </defs>
+                <PieGroup className={"pieGroup"} />
+                <AnnotationGroup className={"annotationGroup"} />
+            </svg>
+            <Tooltip className={'tooltip'} />
+        </Wrapper>
     )
 }
 

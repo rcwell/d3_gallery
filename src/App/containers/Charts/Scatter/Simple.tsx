@@ -1,7 +1,5 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
-
 import { Dropdown } from 'App/components/Dropdown'
 import styled from 'styled-components';
 import { data as carData } from './data';
@@ -40,60 +38,56 @@ export const Simple = () => {
     }, [x, y]);
 
     return (
-        <RouteWrapper
-            title={"Simple Scatter Chart"}
-            description={"Lorem ipsum dolor sith amet"}>
-            <Container>
-                <AxesSelector>
-                    <Dropdown
-                        onChange={setY}
-                        options={[
-                            { displayName: "Mpg", key: "mpg", axis: 'y' },
-                            { displayName: "Cylinders", key: "cylinders", axis: 'y' },
-                            { displayName: "Displacement", key: "displacement", axis: 'y' },
-                            { displayName: "Horsepower", key: "horsepower", axis: 'y' },
-                            { displayName: "Weight", key: "weight", axis: 'y' },
-                            { displayName: "Acceleration", key: "acceleration", axis: 'y' },
-                            { displayName: "Year", key: "year", axis: 'y' }
-                        ]}
-                        value={y}
-                        placeholder={"Select one"}
-                    />
-                    <div>x</div>
-                    <Dropdown
-                        onChange={setX}
-                        options={[
-                            { displayName: "Mpg", key: "mpg", axis: 'x' },
-                            { displayName: "Cylinders", key: "cylinders", axis: 'x' },
-                            { displayName: "Displacement", key: "displacement", axis: 'x' },
-                            { displayName: "Horsepower", key: "horsepower", axis: 'x' },
-                            { displayName: "Weight", key: "weight", axis: 'x' },
-                            { displayName: "Acceleration", key: "acceleration", axis: 'x' },
-                            { displayName: "Year", key: "year", axis: 'x' }
-                        ]}
-                        value={x}
-                        placeholder={"Select one"}
-                    />
-                </AxesSelector>
-                <ScatterPlot
-                    width={800}
-                    height={500}
-                    series={data}
-                    xaxis={{
-                        title: {
-                            text: x.displayName,
-                            align: 'middle'
-                        }
-                    }}
-                    yaxis={{
-                        title: {
-                            text: y.displayName,
-                            align: 'middle'
-                        }
-                    }}
+        <Container>
+            <AxesSelector>
+                <Dropdown
+                    onChange={setY}
+                    options={[
+                        { displayName: "Mpg", key: "mpg", axis: 'y' },
+                        { displayName: "Cylinders", key: "cylinders", axis: 'y' },
+                        { displayName: "Displacement", key: "displacement", axis: 'y' },
+                        { displayName: "Horsepower", key: "horsepower", axis: 'y' },
+                        { displayName: "Weight", key: "weight", axis: 'y' },
+                        { displayName: "Acceleration", key: "acceleration", axis: 'y' },
+                        { displayName: "Year", key: "year", axis: 'y' }
+                    ]}
+                    value={y}
+                    placeholder={"Select one"}
                 />
-            </Container>
-        </RouteWrapper>
+                <div>x</div>
+                <Dropdown
+                    onChange={setX}
+                    options={[
+                        { displayName: "Mpg", key: "mpg", axis: 'x' },
+                        { displayName: "Cylinders", key: "cylinders", axis: 'x' },
+                        { displayName: "Displacement", key: "displacement", axis: 'x' },
+                        { displayName: "Horsepower", key: "horsepower", axis: 'x' },
+                        { displayName: "Weight", key: "weight", axis: 'x' },
+                        { displayName: "Acceleration", key: "acceleration", axis: 'x' },
+                        { displayName: "Year", key: "year", axis: 'x' }
+                    ]}
+                    value={x}
+                    placeholder={"Select one"}
+                />
+            </AxesSelector>
+            <ScatterPlot
+                width={800}
+                height={500}
+                series={data}
+                xaxis={{
+                    title: {
+                        text: x.displayName,
+                        align: 'middle'
+                    }
+                }}
+                yaxis={{
+                    title: {
+                        text: y.displayName,
+                        align: 'middle'
+                    }
+                }}
+            />
+        </Container>
     )
 }
 

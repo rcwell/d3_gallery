@@ -2,259 +2,211 @@ import React from 'react';
 import Section from 'App/components/Section';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import RouteWrapper from 'App/components/RouteWrapper';
-import { LineCharts, AreaCharts, BarCharts, ScatterCharts, PieCharts, RadarCharts, HeatmapCharts } from 'App/data';
 import { CardProps } from 'App/interface';
-import * as Line from './Line';
-import * as Area from './Area';
-import * as Bar from './Bar';
-import * as Heatmap from './Heatmap';
-import * as Pie from './Pie';
-import * as Radar from './Radar';
-import * as Scatter from './Scatter';
-
-export const MainRoute = {
-    path: `/charts`,
-    displayName: "charts"
-};
+import Routes from './routes';
 
 const Charts = () => {
     const { location, push } = useHistory();
     const { path, url } = useRouteMatch();
 
-    const handleOnCardClick = ({ d }: CardProps) => {
-        if (!d) return;
+    const handleOnCardClick = ({ path }: CardProps) => {
         push({
             ...location,
-            pathname: `${url}/${d.path}`,
-            state: { ...location.state }
+            pathname: `${url}/${path}`
         });
     };
 
     return (
+
         <Switch>
             <Route
-                path={`${path}/line`}
-                component={LineRoutes} />
-            <Route
-                path={`${path}/area`}
-                component={AreaRoutes} />
-            <Route
-                path={`${path}/bar`}
-                component={BarRoutes} />
-            <Route
-                path={`${path}/scatter`}
-                component={ScatterRoutes} />
-            <Route
-                path={`${path}/pie`}
-                component={PieRoutes} />
-            <Route
-                path={`${path}/radar`}
-                component={RadarRoutes} />
-            <Route
-                path={`${path}/heatmap`}
-                component={HeatmapRoutes} />
-            <Route
-                path={path}
+                exact path={path}
                 component={() => (
                     <RouteWrapper
-                        title={"Charts"}
-                        description={"Lorem ipsum dolor sith amet"}
-                        route={[MainRoute]}>
+                        title={"Basics"}
+                        description={"Lorem ipsum dolor sith amet"}>
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Line"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={LineCharts} />
+                            contents={routeData.line} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Area"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={AreaCharts} />
+                            contents={routeData.area} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Bar"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={BarCharts} />
+                            contents={routeData.bar} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Scatter"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={ScatterCharts} />
+                            contents={routeData.scatter} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Pie"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={PieCharts} />
+                            contents={routeData.pie} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Radar"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={RadarCharts} />
+                            contents={routeData.radar} />
                         <Section
                             onCardClick={handleOnCardClick}
                             title={"Heatmap"}
                             description={"Lorem ipsum dolor sith amet"}
-                            contents={HeatmapCharts} />
+                            contents={routeData.heatmap} />
                     </RouteWrapper>
                 )} />
+            <Route component={Routes} />
         </Switch>
     );
 };
 
 export default Charts;
 
-const LineRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Line.Simple} />
-            <Route
-                path={`${path}/realtime`}
-                component={Line.Realtime} />
-            <Route
-                path={`${path}/step-line`}
-                component={Line.StepLine} />
-            <Route
-                path={`${path}/time-series`}
-                component={Line.TimeSeries} />
-            <Route
-                path={`${path}/multiple-datasets`}
-                component={Line.MultipleDatasets} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Line.Simple} />
-        </Switch>
-    )
-}
-const AreaRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Area.Simple} />
-            <Route
-                path={`${path}/stacked`}
-                component={Area.Stacked} />
-            <Route
-                path={`${path}/time-series`}
-                component={Area.TimeSeries} />
-            <Route
-                path={`${path}/multiple-datasets`}
-                component={Area.MultipleDatasets} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Area.Simple} />
-        </Switch>
-    )
-}
-const BarRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Bar.Simple} />
-            <Route
-                path={`${path}/column`}
-                component={Bar.Column} />
-            <Route
-                path={`${path}/multiple-datasets`}
-                component={Bar.MultipleDatasets} />
-            <Route
-                path={`${path}/negative`}
-                component={Bar.Negative} />
-            <Route
-                path={`${path}/radial`}
-                component={Bar.Radial} />
-            <Route
-                path={`${path}/stacked`}
-                component={Bar.Stacked} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Bar.Simple} />
-        </Switch>
-    )
-}
-const HeatmapRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Heatmap.Simple} />
-            <Route
-                path={`${path}/multiple-datasets`}
-                component={Heatmap.MultipleDatasets} />
-            <Route
-                path={`${path}/color-range`}
-                component={Heatmap.ColorRange} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Heatmap.Simple} />
-        </Switch>
-    )
-}
-const PieRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Pie.Simple} />
-            <Route
-                path={`${path}/donut`}
-                component={Pie.Donut} />
-            <Route
-                path={`${path}/pattern`}
-                component={Pie.Pattern} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Pie.Simple} />
-        </Switch>
-    )
-}
-const RadarRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Radar.Simple} />
-            <Route
-                path={`${path}/color-fill`}
-                component={Radar.ColorFill} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Radar.Simple} />
-        </Switch>
-    )
-}
-const ScatterRoutes = () => {
-    const { path } = useRouteMatch();
-    return (
-        <Switch>
-            <Route
-                path={`${path}/simple`}
-                component={Scatter.Simple} />
-            <Route
-                path={`${path}/icons`}
-                component={Scatter.Icons} />
-            <Route
-                path={`${path}/bubble`}
-                component={Scatter.Bubble} />
-            <Route
-                exact
-                path={`${path}`}
-                component={Scatter.Simple} />
-        </Switch>
-    )
+const routeData = {
+    line: [
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'line/simple'
+        },
+        {
+            title: 'Step Line',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'line/stepline'
+        },
+        {
+            title: 'Multiple Datasets',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'line/multiple-datasets'
+        },
+        {
+            title: 'Time Series',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'line/time-series'
+        }
+    ],
+    area: [
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'area/simple'
+        },
+        {
+            title: 'Multiple Datasets',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'area/multiple-datasets'
+        },
+        {
+            title: 'Stacked',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'area/stacked'
+        },
+        {
+            title: 'Time Series',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'area/time-series'
+        }
+    ],
+    bar: [
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'bar/simple'
+        },
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'bar/column'
+        },
+        {
+            title: 'Multiple Datasets',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'bar/multiple-datasets'
+        },
+        {
+            title: 'stacked',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'bar/stacked'
+        },
+        {
+            title: 'negative',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'bar/negative'
+        },
+        {
+            title: 'Radial',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'bar/radial'
+        }
+    ],
+    scatter: [
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scatter/simple'
+        },
+        {
+            title: 'Bubble',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scatter/bubble'
+        },
+        {
+            title: 'Icon',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'scatter/icon'
+        }
+    ],
+    radar: [
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'radar/simple'
+        },
+        {
+            title: 'Color Fill Polygon',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'radar/color-fill-polygon'
+        }
+    ],
+    pie: [
+        {
+            title: 'Simple',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'pie/simple'
+        },
+        {
+            title: 'Donut',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'pie/donut'
+        },
+        {
+            title: 'Pattern',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'pie/pattern'
+        }
+    ],
+    heatmap: [
+        {
+            title: 'Heatmap',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'heatmap/simple'
+        },
+        {
+            title: 'Multiple Datasets',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'heatmap/multiple-datasets'
+        },
+        {
+            title: 'Color Range',
+            description: 'Lorem ipsum dolor sith amet',
+            path: 'heatmap/color-range'
+        }
+    ],
 }

@@ -1,7 +1,5 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
-
 import { Radar } from 'App/components/Charts/Radar';
 import { randomNum } from 'App/utils';
 
@@ -18,13 +16,9 @@ export const ColorFill = () => {
     }, []);
 
     return (
-        <RouteWrapper
-            title={"Color Fill Polygon Radar Chart"}
-            description={"Lorem ipsum dolor sith amet"}>
-            <Radar
-                polygon
-                axis={axis}
-                series={data} />
-        </RouteWrapper>
+        <Radar
+            polygon
+            axis={axis}
+            series={data} />
     )
 }

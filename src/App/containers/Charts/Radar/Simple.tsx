@@ -1,7 +1,5 @@
 
 import React from 'react';
-import RouteWrapper from 'App/components/RouteWrapper';
-
 import { Radar } from 'App/components/Charts/Radar';
 import { randomNum } from 'App/utils';
 
@@ -18,12 +16,8 @@ export const Simple = () => {
     }, []);
 
     return (
-        <RouteWrapper
-            title={"Simple Radar Chart"}
-            description={"Lorem ipsum dolor sith amet"}>
-            <Radar
-                axis={axis}
-                series={data} />
-        </RouteWrapper>
+        <Radar
+            axis={axis}
+            series={data} />
     )
 }
