@@ -1,9 +1,13 @@
 import React from 'react';
 import { Header } from 'App/components/Styled';
 import { Code, H1, Caption } from 'App/components/Typography';
-import { PageHeaderProps } from 'App/interface';
 
-const PageHeader = ({ title, description }: PageHeaderProps) => {
+interface IPageHeader {
+    title: string,
+    description: string;
+}
+
+const PageHeader = ({ title, description }: IPageHeader) => {
     const renderDescription = () => {
         const strArr: Array<string> = description.split(" ");
         const contents: Array<any> = [];

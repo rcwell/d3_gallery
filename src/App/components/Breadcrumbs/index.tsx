@@ -2,10 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { black, gray, blue } from 'App/components/Colors';
-import { BreadcrumbProps } from 'App/interface';
 import { GoChevronRight, AiFillHome } from 'App/components/Icons';
 
-const BreadCrumbs = ({ links }: BreadcrumbProps) => (
+interface IBreadcrumb {
+    links: Array<{
+        displayName: string;
+        path: string;
+    }>;
+}
+
+const BreadCrumbs = ({ links }: IBreadcrumb) => (
     <CrumbsContainer>
         <div key={"/"}>
             <AiFillHome style={{ marginRight: 10 }} />

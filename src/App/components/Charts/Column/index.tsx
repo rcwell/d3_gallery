@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { SVGProps, ChartProps, VerticalChartProps } from 'App/interface';
+import { SVGProps, ChartProps, VerticalChartProps } from '../index';
 import { rem } from 'App/utils';
 import { getMinMax } from '../helpers';
 import {

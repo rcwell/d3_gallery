@@ -13,8 +13,11 @@ export const getMinMax = (series: Array<Series>, axis: 'x' | 'y', config: { min:
     mx[0] = mx[0] || 0;
     mx[1] = mx[1] || 0;
 
-    mx[0] = config.min && mx[0]! > config.min ? config.min : config.allowNegative ? mx[0]! -5 : mx[0]! >= 5 ? mx[0]! - 5 : 0;
+    mx[0] = config.min && mx[0]! > config.min ? config.min : config.allowNegative ? mx[0]! - 5 : mx[0]! >= 5 ? mx[0]! - 5 : 0;
     mx[1] = config.max && mx[1]! < config.max ? config.max : mx[1]! % 5 === 0 ? mx[1]! : mx[1]! + 5;
 
     return mx as [number, number];
 }
+
+
+

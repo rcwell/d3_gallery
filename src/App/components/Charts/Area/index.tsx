@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { SVGProps, ChartProps, VerticalChartProps } from 'App/interface';
+import { SVGProps, ChartProps, VerticalChartProps } from '../index';
 import { rem, textWrap } from 'App/utils';
 import {
     select,

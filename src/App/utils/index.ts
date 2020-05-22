@@ -49,6 +49,6 @@ export const textWrap = (selection: Selection<SVGTextElement, string, SVGGElemen
     })
 }
 
-
 export const capitalizeString = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
 export const getLastOfArray = (arr: Array<any>) => arr.length > 0 ? arr[arr.length - 1] : null;
