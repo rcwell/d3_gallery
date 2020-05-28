@@ -2,9 +2,11 @@ import React from 'react';
 import Section from 'App/components/Section';
 import { useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
 import { getLastOfArray, capitalizeString } from 'App/utils';
-import { SimpleWorldMap, Chrolopleth, Bubble, Pattern } from './Maps';
+import { SimpleWorldMap, Chrolopleth, Bubble, Pattern, Hex } from './Maps';
 import RouteWrapper from 'App/components/RouteWrapper';
 import { CardProps } from 'App/interface';
+import { Philippines } from './Maps/Philippines';
+import { DotMap } from './Maps/DotMap';
 
 const Geo = () => {
     const { location, push } = useHistory();
@@ -39,6 +41,9 @@ const Geo = () => {
                 <Route exact path={url + '/chrolopleth'} component={Chrolopleth} />
                 <Route exact path={url + '/bubble-map'} component={Bubble} />
                 <Route exact path={url + '/pattern-fill-map'} component={Pattern} />
+                <Route exact path={url + '/hex-map'} component={Hex} />
+                <Route exact path={url + '/philippines'} component={Philippines} />
+                <Route exact path={url + '/dot-map'} component={DotMap} />
                 <Route
                     exact path={path}
                     component={() => (
@@ -72,6 +77,21 @@ const routeData = [
     {
         title: 'Pattern Fill',
         description: 'Lorem ipsum dolor sith amet',
-        path: 'pattern-fill'
+        path: 'pattern-fill-map'
+    },
+    {
+        title: 'Hex Map',
+        description: 'Lorem ipsum dolor sith amet',
+        path: 'hex-map'
+    },
+    {
+        title: 'Dot Map',
+        description: 'Lorem ipsum dolor sith amet',
+        path: 'dot-map'
+    },
+    {
+        title: 'Philippines',
+        description: 'Lorem ipsum dolor sith amet',
+        path: 'philippines'
     }
 ]
