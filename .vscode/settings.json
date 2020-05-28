@@ -6,17 +6,16 @@
 		"**/CVS": true,
 		"**/.DS_Store": true,
 		// additionals
-		"**/node_modules": true,
+		"**/node_modules": false,
 		"**/.babelrc": true,
 		"**/.editorconfig": true,
 		"**/.env": true,
 		"**/.gitignore": true,
-		"**/defs.d.ts": true,
+		"**/defs.d.ts": false,
 		"**/package-lock.json": true,
 		"**/readme.md": true,
-		"**/tsconfig.json": true,
+		"**/tsconfig.json": false,
 		"**/config-overrides.js": true,
 		"**/yarn.lock": true,
-		"**/.vscode": true,
 	}
 }
