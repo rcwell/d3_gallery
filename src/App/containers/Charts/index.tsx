@@ -121,7 +121,7 @@ const routeData = {
             path: 'bar/simple'
         },
         {
-            title: 'Simple',
+            title: 'Column',
             description: 'Lorem ipsum dolor sith amet',
             path: 'bar/column'
         },

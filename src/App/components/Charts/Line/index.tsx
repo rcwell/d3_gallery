@@ -6,7 +6,7 @@ import {
     axisBottom,
     axisLeft,
     scaleLinear,
-    scaleBand,
+    scalePoint,
     Selection,
     scaleOrdinal,
     line,
@@ -91,7 +91,10 @@ export const LineChart = (props: LineChartProps) => {
         .range([innerSize.height, 0])
         .nice();
 
-    const xScale = scaleBand()
+    // const xScale = scaleBand()
+    //     .domain(xaxis.categories || [])
+    //     .rangeRound([0, innerSize.width]);
+    const xScale = scalePoint()
         .domain(xaxis.categories || [])
         .rangeRound([0, innerSize.width]);
 
@@ -136,13 +139,13 @@ export const LineChart = (props: LineChartProps) => {
 
         if (isTimeSeries) {
             _xAxis = axisBottom(timeXScale)
-                .tickPadding(15);
+                .tickPadding(0);
             _yAxis = axisLeft(timeYScale)
                 .tickSize(-innerWidth)
                 .tickPadding(15);
         } else {
             _xAxis = axisBottom(xScale)
-                .tickPadding(15);
+                .tickPadding(0);
             _yAxis = axisLeft(yScale)
                 .tickSize(-innerWidth)
                 .tickPadding(15);
@@ -427,7 +430,7 @@ export const LineChart = (props: LineChartProps) => {
             _seriesData = (series[0].data as TimeData[]).map(x => x.x);
         }
 
-        const bandwidth = isTimeSeries ? innerSize.width / _seriesData.length : xScale.bandwidth();
+        const bandwidth = innerSize.width / (isTimeSeries ? _seriesData : (xaxis.categories || [])).length;
         const columns = isTimeSeries ? _seriesData : xaxis.categories || [];
 
         const mouseLine = container.select<SVGLineElement>('.hover-line');
@@ -446,24 +449,27 @@ export const LineChart = (props: LineChartProps) => {
             .append("rect")
             .merge(indexGroupData)
             .attr("class", 'index-group')
-            .attr("x", (_, i) => (i * bandwidth))
+            // .attr("x", (_, i) => (i * bandwidth))
+            .attr("x", (d: any, i) => isTimeSeries ? i * bandwidth : (xScale(d) || 0) - (bandwidth / 2))
             .attr('y', 0)
             .attr('width', bandwidth)
             .attr('opacity', 0)
             .attr('height', innerSize.height)
         indexGroup
-            .on('mousemove', (_, index: number) => {
-                let x = (index * bandwidth) + (bandwidth / 2);
+            .on('mousemove', (d, index) => {
+                let x = (xScale(d) || 0);
                 if (isTimeSeries) {
                     const halfLen = columns.length / 2;
                     const decrement = (bandwidth / 2) / halfLen;
+                    x = (index * bandwidth) + (bandwidth / 2);
                     x -= decrement * (halfLen - (index));
                 }
                 mouseLine
                     .attr('opacity', 1)
                     .attr('x1', x)
                     .attr('x2', x);
-
+            })
+            .on('mouseenter', (_, index) => {
                 drawHoverOnIndex(index);
             });
 

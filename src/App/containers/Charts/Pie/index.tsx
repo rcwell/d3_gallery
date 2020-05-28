@@ -16,13 +16,13 @@ const routeCards: Array<CardProps> = [
     {
         title: 'Donut',
         description: 'Lorem ipsum dolor sith amet',
-        path: 'bubble',
+        path: 'donut',
         component: Donut
     },
     {
         title: 'Pattern',
         description: 'Lorem ipsum dolor sith amet',
-        path: 'Pattern',
+        path: 'pattern',
         component: Pattern
     }
 ];

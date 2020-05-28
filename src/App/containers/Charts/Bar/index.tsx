@@ -25,7 +25,7 @@ const routeCards: Array<CardProps> = [
     {
         title: 'Column',
         description: 'Lorem ipsum dolor sith amet',
-        path: 'time-series',
+        path: 'column',
         component: Column
     },
     {
